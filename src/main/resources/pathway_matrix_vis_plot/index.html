@@ -1,0 +1,32 @@
+<head>
+<!-- Plotly.js -->
+<script src="plotly-latest.min.js"></script>
+<script src="matrix_data_plotly.js"></script>
+</head>
+<body>
+	<!-- Plotly chart will be drawn inside this DIV -->
+	<div id="myDiv" style="width: 100%; height: 100%"></div>
+	<script>
+		var layout = {
+			scene : {
+				xaxis : {
+					title : 'time'
+				},
+				yaxis : {
+					title : 'multiple events'
+				},
+				zaxis: {
+					title : ''
+				}
+			},
+			dragmode : false,
+			margin : {
+				l : 0,
+				r : 0,
+				b : 0,
+				t : 0
+			}
+		};
+		Plotly.newPlot('myDiv', data, layout);
+	</script>
+</body>

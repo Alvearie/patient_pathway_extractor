@@ -1,0 +1,105 @@
+DATE,PATIENT,ENCOUNTER,CODE,DESCRIPTION,COST,REASONCODE,REASONDESCRIPTION
+2009-11-18,Patient_1,Medication_2,76601001,Intramuscular injection,3647.18,,
+2010-09-29,Patient_1,Procedure_1,68254000,Removal of intrauterine device,8604.61,,
+2010-12-01,Patient_1,Condition_4,252160004,Standard pregnancy test,5835.24,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,169230002,Ultrasound scan for fetal viability,13904.04,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,274804006,Evaluation of uterine fundal height,3505.57,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,225158009,Auscultation of the fetal heart,6706.86,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,44608003,Blood typing  RH typing,3861.94,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,104091002,Hemoglobin / Hematocrit / Platelet count,3152.70,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,47758006,Hepatitis B Surface Antigen Measurement,1919.98,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,31676001,Human immunodeficiency virus antigen test,2709.08,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,310861008,Chlamydia antigen test,2164.76,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,165829005,Gonorrhea infection test,1774.41,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,269828009,Syphilis infection test,2308.04,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,117010004,Urine culture,2146.37,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,90226004,Cytopathology procedure  preparation of smear  genital source,3895.77,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,395123002,Urine screening test for diabetes,2563.31,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,104375008,Hepatitis C antibody test,2713.62,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,169690007,Rubella screening,3783.00,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,104326007,Measurement of Varicella-zoster virus antibody,3068.79,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,28163009,Skin test for tuberculosis,3944.27,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,167271000,Urine protein test,1340.23,72892002,Normal pregnancy
+2010-12-01,Patient_1,Condition_4,5880005,Physical examination of mother,516.65,72892002,Normal pregnancy
+2010-12-29,Patient_1,Procedure_2,274804006,Evaluation of uterine fundal height,7291.26,72892002,Normal pregnancy
+2010-12-29,Patient_1,Procedure_2,225158009,Auscultation of the fetal heart,3362.30,72892002,Normal pregnancy
+2010-12-29,Patient_1,Procedure_2,443529005,Screening for chromosomal aneuploidy in prenatal amniotic fluid,2425.98,72892002,Normal pregnancy
+2011-01-26,Patient_1,Procedure_3,271442007,Fetal anatomy study,516.65,72892002,Normal pregnancy
+2011-01-26,Patient_1,Procedure_3,275833003,Alpha-fetoprotein test,2002.73,72892002,Normal pregnancy
+2011-01-26,Patient_1,Procedure_3,274804006,Evaluation of uterine fundal height,7694.55,72892002,Normal pregnancy
+2011-01-26,Patient_1,Procedure_3,225158009,Auscultation of the fetal heart,7406.09,72892002,Normal pregnancy
+2011-02-23,Patient_1,Procedure_4,274804006,Evaluation of uterine fundal height,8159.38,72892002,Normal pregnancy
+2011-02-23,Patient_1,Procedure_4,225158009,Auscultation of the fetal heart,9868.69,72892002,Normal pregnancy
+2011-03-23,Patient_1,Procedure_5,274804006,Evaluation of uterine fundal height,9682.69,72892002,Normal pregnancy
+2011-03-23,Patient_1,Procedure_5,225158009,Auscultation of the fetal heart,9536.29,72892002,Normal pregnancy
+2011-04-20,Patient_1,Procedure_6,104091002,Hemoglobin / Hematocrit / Platelet count,2452.30,72892002,Normal pregnancy
+2011-04-20,Patient_1,Procedure_6,399014008,Vaccination for diphtheria  pertussis  and tetanus,4474.76,72892002,Normal pregnancy
+2011-04-20,Patient_1,Procedure_6,268556000,Urine screening for glucose,2785.48,72892002,Normal pregnancy
+2011-04-20,Patient_1,Procedure_6,274804006,Evaluation of uterine fundal height,6188.81,72892002,Normal pregnancy
+2011-04-20,Patient_1,Procedure_6,225158009,Auscultation of the fetal heart,5213.42,72892002,Normal pregnancy
+2011-05-18,Patient_1,Procedure_7,274804006,Evaluation of uterine fundal height,5219.87,72892002,Normal pregnancy
+2011-05-18,Patient_1,Procedure_7,225158009,Auscultation of the fetal heart,5502.80,72892002,Normal pregnancy
+2011-06-15,Patient_1,Procedure_8,118001005,Streptococcus pneumoniae group B antigen test,2509.79,72892002,Normal pregnancy
+2011-06-15,Patient_1,Procedure_8,274804006,Evaluation of uterine fundal height,6466.00,72892002,Normal pregnancy
+2011-06-15,Patient_1,Procedure_8,225158009,Auscultation of the fetal heart,4869.82,72892002,Normal pregnancy
+2011-06-29,Patient_1,Procedure_9,274804006,Evaluation of uterine fundal height,3925.41,72892002,Normal pregnancy
+2011-06-29,Patient_1,Procedure_9,225158009,Auscultation of the fetal heart,3986.25,72892002,Normal pregnancy
+2011-07-06,Patient_1,Procedure_10,85548006,Episiotomy,5931.26,72892002,Normal pregnancy
+2011-07-06,Patient_1,Procedure_10,11466000,Cesarean section,10719.03,72892002,Normal pregnancy
+2011-08-17,Patient_1,Procedure_11,5880005,Physical examination following birth,516.65,,
+2011-08-17,Patient_1,Procedure_11,171207006,Depression screening,516.65,,
+2012-04-04,Patient_1,Condition_6,428191000124101,Documentation of current medications,426.95,,
+2012-08-11,Patient_1,Medication_4,169553002,Insertion of subcutaneous contraceptive,8584.66,,
+2015-12-09,Patient_1,Immunization_3,428191000124101,Documentation of current medications,671.08,,
+2016-04-20,Patient_1,Procedure_12,301807007,Removal of subcutaneous contraceptive,13609.47,,
+2016-06-22,Patient_1,Condition_7,252160004,Standard pregnancy test,4444.97,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,169230002,Ultrasound scan for fetal viability,11877.84,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,274804006,Evaluation of uterine fundal height,5185.14,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,225158009,Auscultation of the fetal heart,7183.35,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,44608003,Blood typing  RH typing,1508.06,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,104091002,Hemoglobin / Hematocrit / Platelet count,2210.60,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,47758006,Hepatitis B Surface Antigen Measurement,3278.46,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,31676001,Human immunodeficiency virus antigen test,1871.48,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,310861008,Chlamydia antigen test,2010.21,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,165829005,Gonorrhea infection test,3814.61,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,269828009,Syphilis infection test,1630.14,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,117010004,Urine culture,2494.54,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,90226004,Cytopathology procedure  preparation of smear  genital source,3586.70,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,395123002,Urine screening test for diabetes,2230.76,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,104375008,Hepatitis C antibody test,2098.50,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,169690007,Rubella screening,2974.13,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,104326007,Measurement of Varicella-zoster virus antibody,1643.97,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,28163009,Skin test for tuberculosis,2165.90,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,167271000,Urine protein test,1931.44,72892002,Normal pregnancy
+2016-06-22,Patient_1,Condition_7,5880005,Physical examination of mother,516.65,72892002,Normal pregnancy
+2016-07-20,Patient_1,Procedure_13,274804006,Evaluation of uterine fundal height,5624.49,72892002,Normal pregnancy
+2016-07-20,Patient_1,Procedure_13,225158009,Auscultation of the fetal heart,10052.95,72892002,Normal pregnancy
+2016-07-20,Patient_1,Procedure_13,443529005,Screening for chromosomal aneuploidy in prenatal amniotic fluid,2544.64,72892002,Normal pregnancy
+2016-08-17,Patient_1,Procedure_14,271442007,Fetal anatomy study,516.65,72892002,Normal pregnancy
+2016-08-17,Patient_1,Procedure_14,275833003,Alpha-fetoprotein test,2922.91,72892002,Normal pregnancy
+2016-08-17,Patient_1,Procedure_14,274804006,Evaluation of uterine fundal height,5197.14,72892002,Normal pregnancy
+2016-08-17,Patient_1,Procedure_14,225158009,Auscultation of the fetal heart,6218.58,72892002,Normal pregnancy
+2016-09-14,Patient_1,Procedure_15,274804006,Evaluation of uterine fundal height,9019.46,72892002,Normal pregnancy
+2016-09-14,Patient_1,Procedure_15,225158009,Auscultation of the fetal heart,8074.54,72892002,Normal pregnancy
+2016-10-12,Patient_1,Procedure_16,274804006,Evaluation of uterine fundal height,4170.04,72892002,Normal pregnancy
+2016-10-12,Patient_1,Procedure_16,225158009,Auscultation of the fetal heart,4683.78,72892002,Normal pregnancy
+2016-11-09,Patient_1,Procedure_17,104091002,Hemoglobin / Hematocrit / Platelet count,2736.22,72892002,Normal pregnancy
+2016-11-09,Patient_1,Procedure_17,399014008,Vaccination for diphtheria  pertussis  and tetanus,1368.13,72892002,Normal pregnancy
+2016-11-09,Patient_1,Procedure_17,268556000,Urine screening for glucose,2412.74,72892002,Normal pregnancy
+2016-11-09,Patient_1,Procedure_17,274804006,Evaluation of uterine fundal height,6494.26,72892002,Normal pregnancy
+2016-11-09,Patient_1,Procedure_17,225158009,Auscultation of the fetal heart,8055.47,72892002,Normal pregnancy
+2016-12-07,Patient_1,Procedure_18,274804006,Evaluation of uterine fundal height,6727.83,72892002,Normal pregnancy
+2016-12-07,Patient_1,Procedure_18,225158009,Auscultation of the fetal heart,4630.82,72892002,Normal pregnancy
+2016-12-14,Patient_1,Immunization_4,428191000124101,Documentation of current medications,460.86,,
+2017-01-04,Patient_1,Procedure_19,118001005,Streptococcus pneumoniae group B antigen test,1514.53,72892002,Normal pregnancy
+2017-01-04,Patient_1,Procedure_19,274804006,Evaluation of uterine fundal height,4642.61,72892002,Normal pregnancy
+2017-01-04,Patient_1,Procedure_19,225158009,Auscultation of the fetal heart,7071.16,72892002,Normal pregnancy
+2017-01-18,Patient_1,Procedure_20,274804006,Evaluation of uterine fundal height,8175.80,72892002,Normal pregnancy
+2017-01-18,Patient_1,Procedure_20,225158009,Auscultation of the fetal heart,9086.00,72892002,Normal pregnancy
+2017-01-25,Patient_1,Procedure_21,274804006,Evaluation of uterine fundal height,8176.45,72892002,Normal pregnancy
+2017-01-25,Patient_1,Procedure_21,225158009,Auscultation of the fetal heart,10367.39,72892002,Normal pregnancy
+2017-02-01,Patient_1,Procedure_22,237001001,Augmentation of labor,4828.94,72892002,Normal pregnancy
+2017-02-01,Patient_1,Procedure_22,66348005,Childbirth,516.65,72892002,Normal pregnancy
+2017-03-15,Patient_1,Procedure_23,5880005,Physical examination following birth,516.65,,
+2017-03-15,Patient_1,Procedure_23,171207006,Depression screening,516.65,,
+2017-12-20,Patient_1,Immunization_5,428191000124101,Documentation of current medications,447.10,,

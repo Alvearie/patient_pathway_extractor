@@ -1,0 +1,10 @@
+DATE,PATIENT,ENCOUNTER,CODE,DESCRIPTION,COST
+2010-03-31,Patient_1,Immunization_1,140,Influenza  seasonal  injectable  preservative free,140.52
+2012-04-04,Patient_1,Condition_6,140,Influenza  seasonal  injectable  preservative free,140.52
+2014-04-09,Patient_1,Immunization_2,140,Influenza  seasonal  injectable  preservative free,140.52
+2015-12-09,Patient_1,Immunization_3,121,zoster,140.52
+2015-12-09,Patient_1,Immunization_3,140,Influenza  seasonal  injectable  preservative free,140.52
+2016-12-14,Patient_1,Immunization_4,121,zoster,140.52
+2016-12-14,Patient_1,Immunization_4,140,Influenza  seasonal  injectable  preservative free,140.52
+2016-12-14,Patient_1,Immunization_4,113,Td (adult) preservative free,140.52
+2017-12-20,Patient_1,Immunization_5,140,Influenza  seasonal  injectable  preservative free,140.52

@@ -1,0 +1,5 @@
+ID,START,STOP,PATIENT,ENCOUNTER,CODE,DESCRIPTION,REASONCODE,REASONDESCRIPTION
+Careplan_1,2010-12-01,2011-07-06,Patient_1,Condition_4,134435003,Routine antenatal care,72892002,Normal pregnancy
+Careplan_2,2012-04-25,,Patient_1,Medication_3,736285004,Hyperlipidemia clinical management plan,55822004,Hyperlipidemia
+Careplan_3,2016-06-22,2017-02-01,Patient_1,Condition_7,134435003,Routine antenatal care,72892002,Normal pregnancy
+Careplan_4,2018-01-09,2018-01-16,Patient_1,Immunization_5,869761000000107,Urinary tract infection care,38822007,Cystitis

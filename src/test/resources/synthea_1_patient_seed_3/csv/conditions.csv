@@ -1,0 +1,9 @@
+START,STOP,PATIENT,ENCOUNTER,CODE,DESCRIPTION
+1981-11-11,,Patient_1,Condition_1,162864005,Body mass index 30+ - obesity (finding)
+2000-02-02,,Patient_1,Condition_2,408512008,Body mass index 40+ - severely obese (finding)
+2009-07-27,2010-03-31,Patient_1,Condition_3,65363002,Otitis media
+2010-12-01,2011-07-06,Patient_1,Condition_4,72892002,Normal pregnancy
+2011-11-13,2011-11-27,Patient_1,Condition_5,444814009,Viral sinusitis (disorder)
+2012-04-04,,Patient_1,Condition_6,55822004,Hyperlipidemia
+2016-06-22,2017-02-01,Patient_1,Condition_7,72892002,Normal pregnancy
+2017-11-25,2018-01-16,Patient_1,Condition_8,38822007,Cystitis

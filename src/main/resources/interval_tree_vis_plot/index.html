@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <title>Interval Tree</title>
+
+  <script type="text/javascript" src="../vis.js/vis.min.js"></script>
+  <link href="../vis.js/vis.min.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+    #mynetwork {
+      width: 2048px;
+      height: 1024px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+
+<div id="mynetwork"></div>
+
+<script type="text/javascript" src="nodes_edges.js"></script>
+<script type="text/javascript">
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+      layout: {
+          hierarchical: {
+              direction: 'UD',
+	      sortMethod: 'directed',
+	      nodeSpacing: 200
+          }
+      },
+      physics: {
+          enabled: false
+      }
+  };
+  var network = new vis.Network(container, data, options);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+START,STOP,PATIENT,ENCOUNTER,CODE,DESCRIPTION
+1981-11-11,1991-11-11,Patient_1,Condition_1,74400008,Appendicitis
+1981-11-11,1985-11-11,Patient_1,Condition_2,428251008,History of appendectomy

@@ -1,0 +1,13 @@
+ID,DATE,PATIENT,ENCOUNTER,BODYSITE_CODE,BODYSITE_DESCRIPTION,MODALITY_CODE,MODALITY_DESCRIPTION,SOP_CODE,SOP_DESCRIPTION
+97770432-e581-43f0-aa18-399b8bb4d3d2,2009-04-14,37e957ce-67da-42e9-b7f2-7c097546878a,11724c5e-7810-4210-94a3-ae08558ba46a,8205005,Wrist,DX,Digital Radiography,1.2.840.10008.5.1.4.1.1.1.1,Digital X-Ray Image Storage
+e562d3e0-ae24-496b-afee-4cb9458f3ed6,1993-11-01,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,1512a5f2-101e-45c6-a696-8965ba639973,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+61f10c0f-735c-4807-a7a6-93f488d19939,2002-03-19,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,860de2e6-4ef2-4e04-a16d-e2559dee34ce,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+d3719349-1f25-4220-b3f4-cfd8cc8bcce2,2003-09-11,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,45d9ad62-6b7b-4418-82be-f5a2e73f6802,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+2395956d-0e99-4764-852f-7846fa569170,2003-11-22,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,1967807c-cc05-4b3d-af5f-4f0acaed882e,40983000,Arm,DX,Digital Radiography,1.2.840.10008.5.1.4.1.1.1.1,Digital X-Ray Image Storage
+8e443caf-6338-4844-9fb1-7e527c2356c3,2004-09-05,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,68fcf1ec-c47a-46cc-8d77-ba2b7ec578ae,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+dd2f58a3-a53c-4164-b150-9e509d743a3e,2006-02-26,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,a6896c03-0108-4570-aabe-a8a0085df0b7,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+aab474b3-4ffe-474e-a168-b44f0d6e1ad3,2007-08-21,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,1a220dac-1759-4213-982f-d8ab77275cbc,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+92f5325e-6d79-4e13-b06e-c9beb2f861b1,2009-02-10,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,6ba3cd27-7a84-4392-b735-f1aebff39704,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+b36aba0c-ceb7-4c94-a834-eb2b05768ea7,2010-08-05,b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,46268c4b-617b-4ca4-b550-488d4f9f3f2f,261179002,thoracic,US,Ultrasound,1.2.840.10008.5.1.4.1.1.3.1,Ultrasound Multiframe Image Storage
+67d67ce5-1107-47c2-bdb6-583c67c321bb,2016-02-26,6b016335-bc37-44e1-bce1-7ce59e248769,a1f7a92c-35c4-4e8d-80b5-c98bfb2bdd6d,40983000,Arm,DX,Digital Radiography,1.2.840.10008.5.1.4.1.1.1.1,Digital X-Ray Image Storage
+45c9f210-faee-40e7-963f-93ca97d75186,2018-01-16,6b016335-bc37-44e1-bce1-7ce59e248769,9cdc5cc3-0535-4003-bd2d-44788e00989b,51299004,Clavicle,DX,Digital Radiography,1.2.840.10008.5.1.4.1.1.1.1,Digital X-Ray Image Storage

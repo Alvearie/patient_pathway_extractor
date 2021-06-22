@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<title>Pathway</title>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+<script type="text/javascript" src="../vis.js/vis.min.js"></script>
+<link href="../vis.js/vis.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+	<div id="timeline"></div>
+
+	<script type="text/javascript" src="timeline_items.js"></script>
+	<script type="text/javascript">
+		var container = document.getElementById('timeline');
+		var options = {
+			tooltip : {
+				followMouse : true
+			}
+		};
+		var timeline = new vis.Timeline(container, items, options);
+	</script>
+</body>
+</html>

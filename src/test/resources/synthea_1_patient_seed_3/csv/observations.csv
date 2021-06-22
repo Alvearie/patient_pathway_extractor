@@ -1,0 +1,217 @@
+DATE,PATIENT,ENCOUNTER,CODE,DESCRIPTION,VALUE,UNITS,TYPE
+2010-03-31,Patient_1,Immunization_1,8302-2,Body Height,161.5,cm,numeric
+2010-03-31,Patient_1,Immunization_1,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,0.6,{score},numeric
+2010-03-31,Patient_1,Immunization_1,29463-7,Body Weight,121.2,kg,numeric
+2010-03-31,Patient_1,Immunization_1,39156-5,Body Mass Index,46.5,kg/m2,numeric
+2010-03-31,Patient_1,Immunization_1,8462-4,Diastolic Blood Pressure,77.3,mmHg,numeric
+2010-03-31,Patient_1,Immunization_1,8480-6,Systolic Blood Pressure,117.3,mmHg,numeric
+2010-03-31,Patient_1,Immunization_1,2093-3,Total Cholesterol,169.6,mg/dL,numeric
+2010-03-31,Patient_1,Immunization_1,2571-8,Triglycerides,137.1,mg/dL,numeric
+2010-03-31,Patient_1,Immunization_1,18262-6,Low Density Lipoprotein Cholesterol,66.1,mg/dL,numeric
+2010-03-31,Patient_1,Immunization_1,2085-9,High Density Lipoprotein Cholesterol,76.0,mg/dL,numeric
+2010-03-31,Patient_1,Immunization_1,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2012-04-04,Patient_1,Condition_6,8302-2,Body Height,161.5,cm,numeric
+2012-04-04,Patient_1,Condition_6,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,1.5,{score},numeric
+2012-04-04,Patient_1,Condition_6,29463-7,Body Weight,124.5,kg,numeric
+2012-04-04,Patient_1,Condition_6,39156-5,Body Mass Index,47.8,kg/m2,numeric
+2012-04-04,Patient_1,Condition_6,8462-4,Diastolic Blood Pressure,88.7,mmHg,numeric
+2012-04-04,Patient_1,Condition_6,8480-6,Systolic Blood Pressure,126.6,mmHg,numeric
+2012-04-04,Patient_1,Condition_6,6690-2,Leukocytes [#/volume] in Blood by Automated count,5.1,10*3/uL,numeric
+2012-04-04,Patient_1,Condition_6,789-8,Erythrocytes [#/volume] in Blood by Automated count,5.1,10*6/uL,numeric
+2012-04-04,Patient_1,Condition_6,718-7,Hemoglobin [Mass/volume] in Blood,14.9,g/dL,numeric
+2012-04-04,Patient_1,Condition_6,4544-3,Hematocrit [Volume Fraction] of Blood by Automated count,35.0,%,numeric
+2012-04-04,Patient_1,Condition_6,787-2,MCV [Entitic volume] by Automated count,89.6,fL,numeric
+2012-04-04,Patient_1,Condition_6,785-6,MCH [Entitic mass] by Automated count,28.1,pg,numeric
+2012-04-04,Patient_1,Condition_6,786-4,MCHC [Mass/volume] by Automated count,34.6,g/dL,numeric
+2012-04-04,Patient_1,Condition_6,21000-5,Erythrocyte distribution width [Entitic volume] by Automated count,44.6,fL,numeric
+2012-04-04,Patient_1,Condition_6,777-3,Platelets [#/volume] in Blood by Automated count,308.4,10*3/uL,numeric
+2012-04-04,Patient_1,Condition_6,32207-3,Platelet distribution width [Entitic volume] in Blood by Automated count,410.5,fL,numeric
+2012-04-04,Patient_1,Condition_6,32623-1,Platelet mean volume [Entitic volume] in Blood by Automated count,10.7,fL,numeric
+2012-04-04,Patient_1,Condition_6,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2012-04-04,Patient_1,Condition_6,2093-3,Total Cholesterol,218.3,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,2571-8,Triglycerides,329.3,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,18262-6,Low Density Lipoprotein Cholesterol,166.2,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,2085-9,High Density Lipoprotein Cholesterol,40.6,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,2339-0,Glucose,71.5,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,6299-2,Urea Nitrogen,16.3,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,38483-4,Creatinine,2.9,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,49765-1,Calcium,10.0,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,2947-0,Sodium,138.9,mmol/L,numeric
+2012-04-04,Patient_1,Condition_6,6298-4,Potassium,4.1,mmol/L,numeric
+2012-04-04,Patient_1,Condition_6,2069-3,Chloride,102.4,mmol/L,numeric
+2012-04-04,Patient_1,Condition_6,20565-8,Carbon Dioxide,20.5,mmol/L,numeric
+2012-04-04,Patient_1,Condition_6,33914-3,Glomerular filtration rate/1.73 sq M.predicted,66.3,mL/min,numeric
+2012-04-04,Patient_1,Condition_6,2885-2,Protein [Mass/volume] in Serum or Plasma,62.3,g/dL,numeric
+2012-04-04,Patient_1,Condition_6,1751-7,Albumin [Mass/volume] in Serum or Plasma,4.6,g/dL,numeric
+2012-04-04,Patient_1,Condition_6,10834-0,Globulin [Mass/volume] in Serum by calculation,3.4,g/L,numeric
+2012-04-04,Patient_1,Condition_6,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.9,mg/dL,numeric
+2012-04-04,Patient_1,Condition_6,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,41.0,U/L,numeric
+2012-04-04,Patient_1,Condition_6,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,44.7,U/L,numeric
+2012-04-04,Patient_1,Condition_6,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,39.9,U/L,numeric
+2013-04-25,Patient_1,Medication_5,2339-0,Glucose,67.8,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,6299-2,Urea Nitrogen,8.8,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,38483-4,Creatinine,3.3,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,49765-1,Calcium,9.1,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,2947-0,Sodium,139.6,mmol/L,numeric
+2013-04-25,Patient_1,Medication_5,6298-4,Potassium,4.3,mmol/L,numeric
+2013-04-25,Patient_1,Medication_5,2069-3,Chloride,104.0,mmol/L,numeric
+2013-04-25,Patient_1,Medication_5,20565-8,Carbon Dioxide,22.4,mmol/L,numeric
+2013-04-25,Patient_1,Medication_5,33914-3,Glomerular filtration rate/1.73 sq M.predicted,71.7,mL/min,numeric
+2013-04-25,Patient_1,Medication_5,2885-2,Protein [Mass/volume] in Serum or Plasma,66.1,g/dL,numeric
+2013-04-25,Patient_1,Medication_5,1751-7,Albumin [Mass/volume] in Serum or Plasma,5.5,g/dL,numeric
+2013-04-25,Patient_1,Medication_5,10834-0,Globulin [Mass/volume] in Serum by calculation,2.7,g/L,numeric
+2013-04-25,Patient_1,Medication_5,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,1.1,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,96.3,U/L,numeric
+2013-04-25,Patient_1,Medication_5,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,28.6,U/L,numeric
+2013-04-25,Patient_1,Medication_5,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,31.2,U/L,numeric
+2013-04-25,Patient_1,Medication_5,2093-3,Total Cholesterol,194.7,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,2571-8,Triglycerides,101.1,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,18262-6,Low Density Lipoprotein Cholesterol,133.7,mg/dL,numeric
+2013-04-25,Patient_1,Medication_5,2085-9,High Density Lipoprotein Cholesterol,46.3,mg/dL,numeric
+2014-04-09,Patient_1,Immunization_2,8302-2,Body Height,161.5,cm,numeric
+2014-04-09,Patient_1,Immunization_2,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,2.7,{score},numeric
+2014-04-09,Patient_1,Immunization_2,29463-7,Body Weight,127.4,kg,numeric
+2014-04-09,Patient_1,Immunization_2,39156-5,Body Mass Index,48.9,kg/m2,numeric
+2014-04-09,Patient_1,Immunization_2,8462-4,Diastolic Blood Pressure,79.4,mmHg,numeric
+2014-04-09,Patient_1,Immunization_2,8480-6,Systolic Blood Pressure,129.1,mmHg,numeric
+2014-04-09,Patient_1,Immunization_2,2093-3,Total Cholesterol,181.3,mg/dL,numeric
+2014-04-09,Patient_1,Immunization_2,2571-8,Triglycerides,135.6,mg/dL,numeric
+2014-04-09,Patient_1,Immunization_2,18262-6,Low Density Lipoprotein Cholesterol,83.7,mg/dL,numeric
+2014-04-09,Patient_1,Immunization_2,2085-9,High Density Lipoprotein Cholesterol,70.5,mg/dL,numeric
+2014-04-09,Patient_1,Immunization_2,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2014-04-25,Patient_1,Medication_7,2339-0,Glucose,73.1,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,6299-2,Urea Nitrogen,13.3,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,38483-4,Creatinine,3.3,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,49765-1,Calcium,8.9,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,2947-0,Sodium,136.2,mmol/L,numeric
+2014-04-25,Patient_1,Medication_7,6298-4,Potassium,5.0,mmol/L,numeric
+2014-04-25,Patient_1,Medication_7,2069-3,Chloride,102.6,mmol/L,numeric
+2014-04-25,Patient_1,Medication_7,20565-8,Carbon Dioxide,22.0,mmol/L,numeric
+2014-04-25,Patient_1,Medication_7,33914-3,Glomerular filtration rate/1.73 sq M.predicted,81.1,mL/min,numeric
+2014-04-25,Patient_1,Medication_7,2885-2,Protein [Mass/volume] in Serum or Plasma,78.9,g/dL,numeric
+2014-04-25,Patient_1,Medication_7,1751-7,Albumin [Mass/volume] in Serum or Plasma,3.7,g/dL,numeric
+2014-04-25,Patient_1,Medication_7,10834-0,Globulin [Mass/volume] in Serum by calculation,2.9,g/L,numeric
+2014-04-25,Patient_1,Medication_7,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.4,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,99.4,U/L,numeric
+2014-04-25,Patient_1,Medication_7,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,30.4,U/L,numeric
+2014-04-25,Patient_1,Medication_7,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,29.3,U/L,numeric
+2014-04-25,Patient_1,Medication_7,2093-3,Total Cholesterol,195.6,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,2571-8,Triglycerides,152.7,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,18262-6,Low Density Lipoprotein Cholesterol,98.5,mg/dL,numeric
+2014-04-25,Patient_1,Medication_7,2085-9,High Density Lipoprotein Cholesterol,46.4,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,2339-0,Glucose,92.6,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,6299-2,Urea Nitrogen,12.7,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,38483-4,Creatinine,3.2,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,49765-1,Calcium,9.4,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,2947-0,Sodium,142.0,mmol/L,numeric
+2015-04-25,Patient_1,Medication_8,6298-4,Potassium,3.8,mmol/L,numeric
+2015-04-25,Patient_1,Medication_8,2069-3,Chloride,107.0,mmol/L,numeric
+2015-04-25,Patient_1,Medication_8,20565-8,Carbon Dioxide,28.9,mmol/L,numeric
+2015-04-25,Patient_1,Medication_8,33914-3,Glomerular filtration rate/1.73 sq M.predicted,80.9,mL/min,numeric
+2015-04-25,Patient_1,Medication_8,2885-2,Protein [Mass/volume] in Serum or Plasma,76.7,g/dL,numeric
+2015-04-25,Patient_1,Medication_8,1751-7,Albumin [Mass/volume] in Serum or Plasma,4.6,g/dL,numeric
+2015-04-25,Patient_1,Medication_8,10834-0,Globulin [Mass/volume] in Serum by calculation,2.7,g/L,numeric
+2015-04-25,Patient_1,Medication_8,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.1,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,119.7,U/L,numeric
+2015-04-25,Patient_1,Medication_8,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,56.0,U/L,numeric
+2015-04-25,Patient_1,Medication_8,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,27.2,U/L,numeric
+2015-04-25,Patient_1,Medication_8,2093-3,Total Cholesterol,155.6,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,2571-8,Triglycerides,119.8,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,18262-6,Low Density Lipoprotein Cholesterol,141.5,mg/dL,numeric
+2015-04-25,Patient_1,Medication_8,2085-9,High Density Lipoprotein Cholesterol,68.0,mg/dL,numeric
+2015-12-09,Patient_1,Immunization_3,8302-2,Body Height,161.5,cm,numeric
+2015-12-09,Patient_1,Immunization_3,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,2.5,{score},numeric
+2015-12-09,Patient_1,Immunization_3,29463-7,Body Weight,128.9,kg,numeric
+2015-12-09,Patient_1,Immunization_3,39156-5,Body Mass Index,49.5,kg/m2,numeric
+2015-12-09,Patient_1,Immunization_3,8462-4,Diastolic Blood Pressure,79.9,mmHg,numeric
+2015-12-09,Patient_1,Immunization_3,8480-6,Systolic Blood Pressure,129.3,mmHg,numeric
+2015-12-09,Patient_1,Immunization_3,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2016-04-24,Patient_1,Medication_9,2339-0,Glucose,93.4,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,6299-2,Urea Nitrogen,10.5,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,38483-4,Creatinine,3.4,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,49765-1,Calcium,8.9,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,2947-0,Sodium,139.7,mmol/L,numeric
+2016-04-24,Patient_1,Medication_9,6298-4,Potassium,3.8,mmol/L,numeric
+2016-04-24,Patient_1,Medication_9,2069-3,Chloride,101.6,mmol/L,numeric
+2016-04-24,Patient_1,Medication_9,20565-8,Carbon Dioxide,24.5,mmol/L,numeric
+2016-04-24,Patient_1,Medication_9,33914-3,Glomerular filtration rate/1.73 sq M.predicted,79.4,mL/min,numeric
+2016-04-24,Patient_1,Medication_9,2885-2,Protein [Mass/volume] in Serum or Plasma,77.1,g/dL,numeric
+2016-04-24,Patient_1,Medication_9,1751-7,Albumin [Mass/volume] in Serum or Plasma,5.4,g/dL,numeric
+2016-04-24,Patient_1,Medication_9,10834-0,Globulin [Mass/volume] in Serum by calculation,3.4,g/L,numeric
+2016-04-24,Patient_1,Medication_9,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.1,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,123.9,U/L,numeric
+2016-04-24,Patient_1,Medication_9,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,29.2,U/L,numeric
+2016-04-24,Patient_1,Medication_9,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,20.9,U/L,numeric
+2016-04-24,Patient_1,Medication_9,2093-3,Total Cholesterol,175.2,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,2571-8,Triglycerides,136.2,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,18262-6,Low Density Lipoprotein Cholesterol,91.8,mg/dL,numeric
+2016-04-24,Patient_1,Medication_9,2085-9,High Density Lipoprotein Cholesterol,39.2,mg/dL,numeric
+2016-12-14,Patient_1,Immunization_4,8302-2,Body Height,161.5,cm,numeric
+2016-12-14,Patient_1,Immunization_4,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,0.2,{score},numeric
+2016-12-14,Patient_1,Immunization_4,29463-7,Body Weight,128.9,kg,numeric
+2016-12-14,Patient_1,Immunization_4,39156-5,Body Mass Index,49.5,kg/m2,numeric
+2016-12-14,Patient_1,Immunization_4,8462-4,Diastolic Blood Pressure,81.2,mmHg,numeric
+2016-12-14,Patient_1,Immunization_4,8480-6,Systolic Blood Pressure,136.1,mmHg,numeric
+2016-12-14,Patient_1,Immunization_4,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2017-04-24,Patient_1,Medication_10,2339-0,Glucose,84.1,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,6299-2,Urea Nitrogen,12.8,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,38483-4,Creatinine,3.2,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,49765-1,Calcium,9.2,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,2947-0,Sodium,140.1,mmol/L,numeric
+2017-04-24,Patient_1,Medication_10,6298-4,Potassium,3.7,mmol/L,numeric
+2017-04-24,Patient_1,Medication_10,2069-3,Chloride,107.3,mmol/L,numeric
+2017-04-24,Patient_1,Medication_10,20565-8,Carbon Dioxide,23.7,mmol/L,numeric
+2017-04-24,Patient_1,Medication_10,33914-3,Glomerular filtration rate/1.73 sq M.predicted,76.0,mL/min,numeric
+2017-04-24,Patient_1,Medication_10,2885-2,Protein [Mass/volume] in Serum or Plasma,79.0,g/dL,numeric
+2017-04-24,Patient_1,Medication_10,1751-7,Albumin [Mass/volume] in Serum or Plasma,5.5,g/dL,numeric
+2017-04-24,Patient_1,Medication_10,10834-0,Globulin [Mass/volume] in Serum by calculation,3.0,g/L,numeric
+2017-04-24,Patient_1,Medication_10,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.5,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,129.9,U/L,numeric
+2017-04-24,Patient_1,Medication_10,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,35.3,U/L,numeric
+2017-04-24,Patient_1,Medication_10,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,15.7,U/L,numeric
+2017-04-24,Patient_1,Medication_10,2093-3,Total Cholesterol,204.2,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,2571-8,Triglycerides,143.8,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,18262-6,Low Density Lipoprotein Cholesterol,138.7,mg/dL,numeric
+2017-04-24,Patient_1,Medication_10,2085-9,High Density Lipoprotein Cholesterol,48.0,mg/dL,numeric
+2017-12-20,Patient_1,Immunization_5,8302-2,Body Height,161.5,cm,numeric
+2017-12-20,Patient_1,Immunization_5,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,3.5,{score},numeric
+2017-12-20,Patient_1,Immunization_5,29463-7,Body Weight,128.9,kg,numeric
+2017-12-20,Patient_1,Immunization_5,39156-5,Body Mass Index,49.5,kg/m2,numeric
+2017-12-20,Patient_1,Immunization_5,8462-4,Diastolic Blood Pressure,84.0,mmHg,numeric
+2017-12-20,Patient_1,Immunization_5,8480-6,Systolic Blood Pressure,105.1,mmHg,numeric
+2017-12-20,Patient_1,Immunization_5,2093-3,Total Cholesterol,165.5,mg/dL,numeric
+2017-12-20,Patient_1,Immunization_5,2571-8,Triglycerides,101.9,mg/dL,numeric
+2017-12-20,Patient_1,Immunization_5,18262-6,Low Density Lipoprotein Cholesterol,75.1,mg/dL,numeric
+2017-12-20,Patient_1,Immunization_5,2085-9,High Density Lipoprotein Cholesterol,70.0,mg/dL,numeric
+2017-12-20,Patient_1,Immunization_5,6690-2,Leukocytes [#/volume] in Blood by Automated count,4.5,10*3/uL,numeric
+2017-12-20,Patient_1,Immunization_5,789-8,Erythrocytes [#/volume] in Blood by Automated count,5.4,10*6/uL,numeric
+2017-12-20,Patient_1,Immunization_5,718-7,Hemoglobin [Mass/volume] in Blood,12.6,g/dL,numeric
+2017-12-20,Patient_1,Immunization_5,4544-3,Hematocrit [Volume Fraction] of Blood by Automated count,35.3,%,numeric
+2017-12-20,Patient_1,Immunization_5,787-2,MCV [Entitic volume] by Automated count,91.0,fL,numeric
+2017-12-20,Patient_1,Immunization_5,785-6,MCH [Entitic mass] by Automated count,31.6,pg,numeric
+2017-12-20,Patient_1,Immunization_5,786-4,MCHC [Mass/volume] by Automated count,33.5,g/dL,numeric
+2017-12-20,Patient_1,Immunization_5,21000-5,Erythrocyte distribution width [Entitic volume] by Automated count,39.2,fL,numeric
+2017-12-20,Patient_1,Immunization_5,777-3,Platelets [#/volume] in Blood by Automated count,412.1,10*3/uL,numeric
+2017-12-20,Patient_1,Immunization_5,32207-3,Platelet distribution width [Entitic volume] in Blood by Automated count,319.9,fL,numeric
+2017-12-20,Patient_1,Immunization_5,32623-1,Platelet mean volume [Entitic volume] in Blood by Automated count,11.4,fL,numeric
+2017-12-20,Patient_1,Immunization_5,72166-2,Tobacco smoking status NHIS,Never smoker,,text
+2018-04-24,Patient_1,Medication_11,2339-0,Glucose,83.1,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,6299-2,Urea Nitrogen,17.6,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,38483-4,Creatinine,2.7,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,49765-1,Calcium,9.8,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,2947-0,Sodium,141.4,mmol/L,numeric
+2018-04-24,Patient_1,Medication_11,6298-4,Potassium,4.7,mmol/L,numeric
+2018-04-24,Patient_1,Medication_11,2069-3,Chloride,107.1,mmol/L,numeric
+2018-04-24,Patient_1,Medication_11,20565-8,Carbon Dioxide,24.3,mmol/L,numeric
+2018-04-24,Patient_1,Medication_11,33914-3,Glomerular filtration rate/1.73 sq M.predicted,86.9,mL/min,numeric
+2018-04-24,Patient_1,Medication_11,2885-2,Protein [Mass/volume] in Serum or Plasma,74.7,g/dL,numeric
+2018-04-24,Patient_1,Medication_11,1751-7,Albumin [Mass/volume] in Serum or Plasma,5.5,g/dL,numeric
+2018-04-24,Patient_1,Medication_11,10834-0,Globulin [Mass/volume] in Serum by calculation,2.5,g/L,numeric
+2018-04-24,Patient_1,Medication_11,1975-2,Bilirubin.total [Mass/volume] in Serum or Plasma,0.9,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,6768-6,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,63.4,U/L,numeric
+2018-04-24,Patient_1,Medication_11,1742-6,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,30.5,U/L,numeric
+2018-04-24,Patient_1,Medication_11,1920-8,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,29.2,U/L,numeric
+2018-04-24,Patient_1,Medication_11,2093-3,Total Cholesterol,167.8,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,2571-8,Triglycerides,105.8,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,18262-6,Low Density Lipoprotein Cholesterol,110.9,mg/dL,numeric
+2018-04-24,Patient_1,Medication_11,2085-9,High Density Lipoprotein Cholesterol,62.2,mg/dL,numeric
