@@ -118,7 +118,7 @@ This is a visualization of the sparse 2D matrix that contains the data in `Pathw
 
 ![Pathway Image](images/vis_interval_tree__0007782f-ca96-4ad1-bdf7-516ab5dc1ef5.png)
 
-This is a visualization of the `IntervalTree` that contains events with start/stop date (interval) for the patient. This is mainly useful for debug purposes. Each node in the tree contains:
+This is a visualization of the `IntervalTree` that contains events with start/stop date (interval) for the patient. This visualization is mainly useful for debug purposes. Each node in the tree contains:
 - the minimum of the interval, i.e. its start date
 - the maximum of the interval, i.e. its stop date
 - the maximum of the subtree rooted at this node
