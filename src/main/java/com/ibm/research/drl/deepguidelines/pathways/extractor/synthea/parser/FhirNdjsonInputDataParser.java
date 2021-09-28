@@ -207,16 +207,18 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
                     csvParser = new CsvParser(csvParserSettings);
 
                     // Add column headers
-                    StringBuilder sb = new StringBuilder(String.join(",",
-                        Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType)));
-                    sb.append("," + Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
+                    StringBuilder sb = new StringBuilder();
                     if (!SyntheaMedicalTypes.PATIENTS.equals(medicalType)) {
+                        sb.append(String.join(",", Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType)));
+                        sb.append("," + Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
                         sb.append("," + Commons.SYNTHEA_EVENT_COLUMN_NAME.get(medicalType));
-                    }
-                    if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
-                        sb.append(",START,STOP");
+                        if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
+                            sb.append(",START,STOP");
+                        } else {
+                            sb.append(",DATE");
+                        }
                     } else {
-                        sb.append(",DATE");
+                        sb.append(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
                     }
                     csvParser.parseRecord(sb.toString());
 
@@ -257,32 +259,37 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
             String line;
             boolean validStartDate = false;
             try {
-                while ((line = reader.readLine()) != null && !validStartDate) {
+                while (!validStartDate && (line = reader.readLine()) != null) {
                     try (StringReader resourceReader = new StringReader(line)) {
                         Resource resource = FHIRParser.parser(Format.JSON).parse(resourceReader);
                         // Parse the resource and generate a csv string. It's possible that FHIR
                         // resources do not contain start dates. If so, skip the resource and go
                         // on to the next one.
-                        String startDate = getStartDate(resource, fhirMedicalType);
-                        if (startDate != null && !startDate.isEmpty()) {
+                        if (!FHIRResourceType.Value.PATIENT.equals(fhirMedicalType)) {
+                            String startDate = getStartDate(resource, fhirMedicalType);
+                            if (startDate != null && !startDate.isEmpty()) {
+                                validStartDate = true;
+                                List<String> columnValues = new ArrayList<>();
+                                for (String featureFhirPathExpression : Commons.FHIR_FEATURE_ELEMENT_FHIRPATHS.get(fhirMedicalType)) {
+                                    String featureValue = getNodeValueAsString(getElementNodes(resource, featureFhirPathExpression));
+                                    columnValues.add(featureValue == null ? EMPTY_STRING : featureValue);
+                                }
+                                String patientId = getPatientId(resource, fhirMedicalType);
+                                columnValues.add(patientId == null ? EMPTY_STRING : patientId);
+                                if (!FHIRResourceType.Value.PATIENT.equals(fhirMedicalType)) {
+                                    String eventId = getEventId(resource, fhirMedicalType);
+                                    columnValues.add(eventId == null ? EMPTY_STRING : eventId);
+                                }
+                                columnValues.add(startDate == null ? EMPTY_STRING : startDate);
+                                if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
+                                    String stopDate = getStopDate(resource, fhirMedicalType);
+                                    columnValues.add(stopDate == null ? EMPTY_STRING : stopDate);
+                                }
+                                nextRecord = csvParser.parseRecord(String.join(",", columnValues));
+                            }
+                        } else {
                             validStartDate = true;
-                            List<String> columnValues = new ArrayList<>();
-                            for (String featureFhirPathExpression : Commons.FHIR_FEATURE_ELEMENT_FHIRPATHS.get(fhirMedicalType)) {
-                                String featureValue = getNodeValueAsString(getElementNodes(resource, featureFhirPathExpression));
-                                columnValues.add(featureValue == null ? EMPTY_STRING : featureValue);
-                            }
-                            String patientId = getPatientId(resource, fhirMedicalType);
-                            columnValues.add(patientId == null ? EMPTY_STRING : patientId);
-                            if (!FHIRResourceType.Value.PATIENT.equals(fhirMedicalType)) {
-                                String eventId = getEventId(resource, fhirMedicalType);
-                                columnValues.add(eventId == null ? EMPTY_STRING : eventId);
-                            }
-                            columnValues.add(startDate == null ? EMPTY_STRING : startDate);
-                            if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
-                                String stopDate = getStopDate(resource, fhirMedicalType);
-                                columnValues.add(stopDate == null ? EMPTY_STRING : stopDate);
-                            }
-                            nextRecord = csvParser.parseRecord(String.join(",", columnValues));
+                            nextRecord = csvParser.parseRecord(getPatientId(resource, fhirMedicalType));
                         }
                     }
                 }

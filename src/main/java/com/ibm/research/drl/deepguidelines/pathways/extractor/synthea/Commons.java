@@ -146,20 +146,20 @@ public class Commons {
         FHIR_FILE_NAMES.put(FHIRResourceType.Value.PATIENT, "Patient.ndjson");
         FHIR_FILE_NAMES.put(FHIRResourceType.Value.PROCEDURE, "Procedure.ndjson");
         
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.onsetDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.onset.as(DateTime)");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.start");
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.onsetDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.onset.as(DateTime)");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.start");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMAGING_STUDY, "ImagingStudy.series.started");
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.occurrenceDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.occurrence.as(DateTime)");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.authoredOn");
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.effectiveDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.effective.as(DateTime)");
         // patients have no start date
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.performedDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.performed.as(DateTime)");
 
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.lastOccurrence");
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.end");
-        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.abatementDateTime");
+        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.abatement.as(DateTime)");
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.end");
 
         FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.patient");
@@ -190,8 +190,8 @@ public class Commons {
         FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.ENCOUNTER, new String[] {});
         FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.IMAGING_STUDY, new String[] { "ImagingStudy.series.bodySite.code", "ImagingStudy.series.modality.code" });
         FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.IMMUNIZATION, new String[] {});
-        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.MEDICATION_REQUEST, new String[] { "MedicationRequest.medicationCodeableConcept.coding.code" });
-        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.OBSERVATION, new String[] { "Observation.code.coding.code", "Observation.valueQuantity.value", "Observation.valueQuantity.unit" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.MEDICATION_REQUEST, new String[] { "MedicationRequest.medication.as(CodeableConcept).coding.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.OBSERVATION, new String[] { "Observation.code.coding.code", "Observation.value.as(Quantity).value", "Observation.value.as(Quantity).unit" });
         // patients have no features
         FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.PROCEDURE, new String[] { "Procedure.code.coding.code" });
         
