@@ -18,6 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
 
 @RunWith(SpringRunner.class)
@@ -30,16 +33,13 @@ public class Issue31Test {
     @Autowired
     private InMemoryDataProviderBuilder inMemoryDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     @Test
     public void test() throws IOException {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways().collect(Collectors.toList());
         assertThat(actualPathways, notNullValue());
         assertThat(actualPathways.size(), equalTo(1));
         PathwayEventsLine actualPathwayEventsLine = actualPathways.get(0).getPathwayEventsLine();

@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,17 +19,17 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Commons;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProviderBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEvent;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventFeature;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventFeatures;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventTemporalType;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventsLine;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwaysBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Patient;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.SyntheaMedicalTypes;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.testutils.ExpectedDataForSynthea1PatientSeed3;
 
 @RunWith(SpringRunner.class)
@@ -39,16 +40,13 @@ public class PathwayMatrixBuilderTest {
     @Autowired
     private InMemoryDataProviderBuilder inMemoryDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     @Test
     public void test() {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> pathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> pathways = dataProvider.getPathways().collect(Collectors.toList());
         Pathway pathway = pathways.get(2);
         assertThat(pathway.getId(), equalTo("2009-07-27T00:00:00Z,2010-03-31T23:59:59Z,Patient_1,Condition_3"));
         assertThat(pathway.getPathwayEventsLine(), equalTo(getExpectedPathwayEventsLine()));
@@ -265,7 +263,12 @@ public class PathwayMatrixBuilderTest {
         }
 
         @Override
-        public String getDataPathName() {
+        public String produceJavascriptDataForIntervalTreeVisualization(String patientId) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Stream<Pathway> getPathways() {
             throw new UnsupportedOperationException();
         }
 

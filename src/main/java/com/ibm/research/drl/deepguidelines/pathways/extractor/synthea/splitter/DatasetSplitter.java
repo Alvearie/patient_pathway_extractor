@@ -11,17 +11,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.SyntheaMedicalTypes;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.InputDataParser;
 
 public class DatasetSplitter {
 
     private final static Logger LOG = LoggerFactory.getLogger(DatasetSplitter.class);
 
     private final String inputDirectoryName;
+    private final InputDataParser inputDataParser;
 
-    public DatasetSplitter(String inputDirectoryName) {
+    public DatasetSplitter(String inputDirectoryName, InputDataParser inputDataParser) {
         this.inputDirectoryName = (inputDirectoryName.endsWith(File.separator))
                 ? inputDirectoryName
                 : inputDirectoryName + File.separator;
+        this.inputDataParser = inputDataParser;
     }
 
     public List<String> split(int maxNumberOfPatientsPerChunk, String outputDirectoryName) throws IOException {
@@ -32,7 +35,7 @@ public class DatasetSplitter {
         Files.createDirectories(outputDirectoryPath);
 
         ChunksDirectoriesTree chunksDirectoriesTree = new ChunksDirectoriesTree(inputDirectoryName, maxNumberOfPatientsPerChunk,
-                outputDirectoryName);
+                outputDirectoryName, inputDataParser);
         buildChunkRootDirectoryPaths(chunksDirectoriesTree.getChunkRootDirectoryNames());
         split(chunksDirectoriesTree);
         LOG.info("finished splitting dataset from " + inputDirectoryName + " to " + outputDirectoryName);
@@ -47,7 +50,7 @@ public class DatasetSplitter {
     }
 
     private void split(ChunksDirectoriesTree chunksDirectoriesTree) throws IOException {
-        FileSplitter fileSplitter = new FileSplitter(inputDirectoryName);
+        FileSplitter fileSplitter = new FileSplitter(inputDirectoryName, inputDataParser);
         for (SyntheaMedicalTypes syntheaType : SyntheaMedicalTypes.values()) {
             fileSplitter.split(chunksDirectoriesTree, syntheaType);
         }

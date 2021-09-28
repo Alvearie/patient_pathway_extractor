@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Set;
 
+import com.ibm.fhir.model.type.code.FHIRResourceType;
+
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 public class Commons {
@@ -33,6 +35,33 @@ public class Commons {
             SyntheaMedicalTypes.IMMUNIZATIONS,
             SyntheaMedicalTypes.OBSERVATIONS,
             SyntheaMedicalTypes.PROCEDURES));
+
+    public static final EnumMap<FHIRResourceType.Value, String> FHIR_FILE_NAMES = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final EnumMap<FHIRResourceType.Value, String> FHIR_START_DATE_ELEMENT_FHIRPATH = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final EnumMap<FHIRResourceType.Value, String> FHIR_STOP_DATE_ELEMENT_FHIRPATH = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final EnumMap<FHIRResourceType.Value, String> FHIR_PATIENT_ELEMENT_FHIRPATH = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final EnumMap<FHIRResourceType.Value, String> FHIR_EVENT_ELEMENT_FHIRPATH = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final EnumMap<FHIRResourceType.Value, String[]> FHIR_FEATURE_ELEMENT_FHIRPATHS = new EnumMap<>(FHIRResourceType.Value.class);
+    
+    public static final EnumMap<FHIRResourceType.Value, SyntheaMedicalTypes> FHIR_MEDICAL_TYPE_MAP = new EnumMap<>(FHIRResourceType.Value.class);
+
+    public static final Set<FHIRResourceType.Value> FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS = new ObjectOpenHashSet<>(Arrays.asList(
+        FHIRResourceType.Value.ALLERGY_INTOLERANCE,
+        FHIRResourceType.Value.CARE_PLAN,
+        FHIRResourceType.Value.CONDITION,
+        FHIRResourceType.Value.ENCOUNTER));
+
+    public static final Set<FHIRResourceType.Value> FHIR_MEDICAL_TYPES_YIELDING_ISOLATED_PATHWAY_EVENTS = new ObjectOpenHashSet<>(Arrays.asList(
+        FHIRResourceType.Value.IMAGING_STUDY,
+        FHIRResourceType.Value.IMMUNIZATION,
+        FHIRResourceType.Value.MEDICATION_REQUEST,
+        FHIRResourceType.Value.OBSERVATION,
+        FHIRResourceType.Value.PROCEDURE));
 
     static {
         SYNTHEA_FILE_NAMES.put(SyntheaMedicalTypes.ALLERGIES, "allergies.csv");
@@ -103,6 +132,79 @@ public class Commons {
         SYNTHEA_FEATURE_COLUMN_NAMES.put(SyntheaMedicalTypes.OBSERVATIONS, new String[] { "CODE", "VALUE", "UNITS" });
         // patients have no feature columns
         SYNTHEA_FEATURE_COLUMN_NAMES.put(SyntheaMedicalTypes.PROCEDURES, new String[] { "CODE" });
+
+        
+        
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.CONDITION, "Condition.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.IMAGING_STUDY, "ImagingStudy.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.OBSERVATION, "Observation.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.PATIENT, "Patient.ndjson");
+        FHIR_FILE_NAMES.put(FHIRResourceType.Value.PROCEDURE, "Procedure.ndjson");
+        
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.onsetDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.start");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.onsetDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.start");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMAGING_STUDY, "ImagingStudy.series.started");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.occurrenceDateTime");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.authoredOn");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.effectiveDateTime");
+        // patients have no start date
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.performedDateTime");
+
+        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.lastOccurrence");
+        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.end");
+        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.abatementDateTime");
+        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.end");
+
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.patient");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMAGING_STUDY, "ImagingStudy.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.patient");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.subject");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PATIENT, "Patient.id");
+        FHIR_PATIENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.subject");
+
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.id");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMAGING_STUDY, "ImagingStudy.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.IMMUNIZATION, "Immunization.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.encounter");
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.encounter");
+        // patients have no event id
+        FHIR_EVENT_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.encounter");
+
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, new String[] { "AllergyIntolerance.code.coding.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.CARE_PLAN, new String[] { "CarePlan.activity.detail.code.coding.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.CONDITION, new String[] { "Condition.code.coding.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.ENCOUNTER, new String[] {});
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.IMAGING_STUDY, new String[] { "ImagingStudy.series.bodySite.code", "ImagingStudy.series.modality.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.IMMUNIZATION, new String[] {});
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.MEDICATION_REQUEST, new String[] { "MedicationRequest.medicationCodeableConcept.coding.code" });
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.OBSERVATION, new String[] { "Observation.code.coding.code", "Observation.valueQuantity.value", "Observation.valueQuantity.unit" });
+        // patients have no features
+        FHIR_FEATURE_ELEMENT_FHIRPATHS.put(FHIRResourceType.Value.PROCEDURE, new String[] { "Procedure.code.coding.code" });
+        
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, SyntheaMedicalTypes.ALLERGIES);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.CARE_PLAN, SyntheaMedicalTypes.CAREPLANS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.CONDITION, SyntheaMedicalTypes.CONDITIONS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.ENCOUNTER, SyntheaMedicalTypes.ENCOUNTERS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.IMAGING_STUDY, SyntheaMedicalTypes.IMAGING_STUDIES);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.IMMUNIZATION, SyntheaMedicalTypes.IMMUNIZATIONS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.MEDICATION_REQUEST, SyntheaMedicalTypes.MEDICATIONS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.OBSERVATION, SyntheaMedicalTypes.OBSERVATIONS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.PATIENT, SyntheaMedicalTypes.PATIENTS);
+        FHIR_MEDICAL_TYPE_MAP.put(FHIRResourceType.Value.PROCEDURE, SyntheaMedicalTypes.PROCEDURES);
     }
 
 }

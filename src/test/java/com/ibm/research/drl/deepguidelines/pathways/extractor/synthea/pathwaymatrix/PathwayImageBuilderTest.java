@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -16,10 +17,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProviderBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwaysBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.testutils.ExpectedDataForSynthea1PatientSeed3;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
 
@@ -33,18 +34,15 @@ public class PathwayImageBuilderTest {
     @Autowired
     private InMemoryDataProviderBuilder inMemoryDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     private PathwayImageBuilder pathwayImageBuilder = new PathwayImageBuilder();
 
     @Test
     public void testTrimAndConcatenateSlices() throws IOException {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        Pathway pathway = pathwaysBuilder.build(dataProvider).collect(Collectors.toList()).get(2);
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        Pathway pathway = dataProvider.getPathways().collect(Collectors.toList()).get(2);
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayMatrix actualPathwayMatrix = pathwayMatrixBuilder.build(pathway);
         PathwayImage actualPathwayImage = pathwayImageBuilder.trimAndConcatenateSlices(actualPathwayMatrix);
@@ -59,8 +57,8 @@ public class PathwayImageBuilderTest {
 
     @Test
     public void testCollapsedSlices() throws IOException {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        Pathway pathway = pathwaysBuilder.build(dataProvider).collect(Collectors.toList()).get(2);
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        Pathway pathway = dataProvider.getPathways().collect(Collectors.toList()).get(2);
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayMatrix actualPathwayMatrix = pathwayMatrixBuilder.build(pathway);
         PathwayImage actualPathwayImage = pathwayImageBuilder.collapseSlices(actualPathwayMatrix);

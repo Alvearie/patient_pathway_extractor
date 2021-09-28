@@ -23,7 +23,7 @@ public class PathwayImageVisualizationBuilder extends AbstractVisualizationBuild
     private static final String WHITE = "rgb(255,255,255)";
 
     public PathwayImageVisualizationBuilder(
-            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
+            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.output.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
         super(patientIdsForWhichWeWantVisualizations);
     }
 

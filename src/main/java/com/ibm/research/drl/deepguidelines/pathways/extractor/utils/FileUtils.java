@@ -3,15 +3,27 @@ package com.ibm.research.drl.deepguidelines.pathways.extractor.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.ibm.fhir.model.format.Format;
+import com.ibm.fhir.model.generator.FHIRGenerator;
+import com.ibm.fhir.model.parser.FHIRParser;
+import com.ibm.fhir.model.resource.Bundle;
+import com.ibm.fhir.model.resource.Bundle.Entry;
+import com.ibm.fhir.model.resource.Resource;
 
 public class FileUtils {
     
@@ -73,4 +85,33 @@ public class FileUtils {
         Files.write(path, content.getBytes());
         return path;
     }
+
+    public static List<Resource> readFhirNdjsonFile(String fileName) throws Exception {
+        List<Resource> resources = new ArrayList<>();
+        
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while((line = bufferedReader.readLine()) != null) {
+                try (StringReader resourceReader = new StringReader(line)) {
+                    resources.add(FHIRParser.parser(Format.JSON).parse(resourceReader));
+                }
+            }
+        }
+        
+        return resources;
+    }
+
+    public static void writeFhirBundleAsNdjsonFile(Bundle bundle, String fileName) throws Exception {
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
+            for (Entry entry : bundle.getEntry()) {
+                Resource resource = entry.getResource();
+                try (StringWriter sw = new StringWriter()) {
+                    FHIRGenerator.generator(Format.JSON, false).generate(resource, sw);
+                    fileWriter.write(sw.toString() + "\n");
+                }
+            }
+            fileWriter.flush();
+        }
+    }
+
 }

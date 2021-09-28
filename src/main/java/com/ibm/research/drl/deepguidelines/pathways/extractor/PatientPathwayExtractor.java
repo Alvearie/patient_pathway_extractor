@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,14 +17,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProvider;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProviderBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.OutputFormatter;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayImagesWriter;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwaysBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.FhirNdjsonInputDataParser;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.InputDataParser;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayImage;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayImageBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayMatrix;
@@ -43,10 +47,28 @@ public class PatientPathwayExtractor {
 
     public static void main(String[] args) throws ParseException, IOException {
         ConfigurableApplicationContext context = SpringApplication.run(PatientPathwayExtractor.class, args);
-        List<String> rootDirectoryNames = getRootDirectoriesNames(context);
+        ConfigurableEnvironment contextEnvironment = context.getEnvironment();
+        String inputDataPath = contextEnvironment.getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path");
+        if (!inputDataPath.endsWith(File.separator)) {
+            inputDataPath = inputDataPath + File.separator;
+        }
+        String inputDataFormat = contextEnvironment.getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.format");
+        InputDataParser inputDataParser;
+        long now = Instant.now().toEpochMilli();
+        if ("SYNTHEA_CSV".equals(inputDataFormat)) {
+            inputDataParser = new SyntheaCsvInputDataParser(now);
+        } else if ("FHIR_NDJSON".equals(inputDataFormat)) {
+            inputDataParser = new FhirNdjsonInputDataParser(now);
+        } else {
+            throw new RuntimeException("specified input data format '" + inputDataFormat + "' is not valid");
+        }
+        List<String> rootDirectoryNames = getRootDirectoriesNames(inputDataPath, inputDataParser, contextEnvironment);
+        if (rootDirectoryNames.size() > 1 || (rootDirectoryNames.size() == 1 && !inputDataPath.equals(rootDirectoryNames.get(0)))) {
+            // we split the data, so it's now in csv format
+            inputDataParser = new SyntheaCsvInputDataParser(now);
+        }
         InMemoryDataProviderBuilder inMemoryDataProviderBuilder = context.getBean(InMemoryDataProviderBuilder.class);
         PathwayImagesWriter pathwayImagesWriter = context.getBean(PathwayImagesWriter.class);
-        PathwaysBuilder pathwaysBuilder = context.getBean(PathwaysBuilder.class);
         PathwayImageBuilder pathwayImageBuilder = new PathwayImageBuilder();
         PathwayVisualizationBuilder pathwayVisualizationBuilder = context.getBean(PathwayVisualizationBuilder.class);
         PathwayMatrixVisualizationBuilder pathwayMatrixVisualizationBuilder = context.getBean(PathwayMatrixVisualizationBuilder.class);
@@ -56,12 +78,12 @@ public class PatientPathwayExtractor {
                 "com.ibm.research.drl.deepguidelines.pathways.extractor.output.pathway.image.without.pathway.event.features.from.start.and.stop.pathway.events",
                 Boolean.class);
         for (String rootDirectoryName : rootDirectoryNames) {
-            LOG.info("processing Synthea data chunk in direcotry " + rootDirectoryName);
-            final DataProvider dataProvider = inMemoryDataProviderBuilder.build(rootDirectoryName);
+            LOG.info("processing input data chunk in directory " + rootDirectoryName);
+            final DataProvider dataProvider = inMemoryDataProviderBuilder.build(rootDirectoryName, inputDataParser);
             intervalTreeVisualizationBuilder.buildVisualization((InMemoryDataProvider) dataProvider);
             final PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
             final OutputFormatter outputFormatter = new OutputFormatter();
-            Stream<Pathway> pathwaysStream = pathwaysBuilder.build(dataProvider);
+            Stream<Pathway> pathwaysStream = dataProvider.getPathways();
             pathwaysStream.forEach(pathway -> {
                 PathwayMatrix pathwayMatrix = (buildWithoutPathwayEventFeaturesFromStartAndStopPathwayEvents)
                         ? pathwayMatrixBuilder.buildWithoutPathwayEventFeaturesFromStartAndStopPathwayEvents(pathway)
@@ -80,31 +102,36 @@ public class PatientPathwayExtractor {
                     pathwayImageVisualizationBuilder.buildVisualization(pathwayImage, pathway);
                 }
             });
-            LOG.info("finished processing Synthea data chunk in direcotry " + rootDirectoryName);
+            LOG.info("finished processing input data chunk in directory " + rootDirectoryName);
         }
         pathwayImagesWriter.close();
         context.close();
     }
 
-    private static List<String> getRootDirectoriesNames(ConfigurableApplicationContext context) throws IOException {
-        String syntheaDataPath = context.getEnvironment().getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path");
-        if (!syntheaDataPath.endsWith(File.separator))
-            syntheaDataPath = syntheaDataPath + File.separator;
-        String syntheaSplitToPath = context.getEnvironment()
-                .getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.split.to.path");
-        List<String> rootDirectoriesNames = new ObjectArrayList<>();
-        if (syntheaSplitToPath == null || "".equals(syntheaSplitToPath)) {
-            rootDirectoriesNames.add(syntheaDataPath);
+    private static List<String> getRootDirectoriesNames(String inputDataPath, InputDataParser inputDataParser,
+            ConfigurableEnvironment contextEnvironment) throws IOException {
+        List<String> rootDirectoriesNames;
+        String splitToPath = contextEnvironment.getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.split.to.path");
+        Integer maxPatientsPerChunk = null;
+        if (splitToPath != null && !splitToPath.isEmpty()) {
+            String maxPatientsPerChunkString = contextEnvironment
+                .getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.split.max.number.of.patients.per.chunk");
+            if (maxPatientsPerChunkString != null && !maxPatientsPerChunkString.isEmpty()) {
+                maxPatientsPerChunk = Integer.valueOf(maxPatientsPerChunkString);
+            }
+        }
+        if (splitToPath == null || splitToPath.isEmpty() || maxPatientsPerChunk == null || maxPatientsPerChunk < 1) {
+            rootDirectoriesNames = new ObjectArrayList<>();
+            rootDirectoriesNames.add(inputDataPath);
         } else {
-            DatasetSplitter datasetSplitter = new DatasetSplitter(syntheaDataPath);
-            int maxNumberOfPatientsPerChunk = Integer.valueOf(context.getEnvironment()
-                    .getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.split.max.number.of.patients.per.chunk"));
-            rootDirectoriesNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, syntheaSplitToPath);
+            DatasetSplitter datasetSplitter = new DatasetSplitter(inputDataPath, inputDataParser);
+            rootDirectoriesNames = datasetSplitter.split(maxPatientsPerChunk, splitToPath);
         }
         LOG.info("root directories names: " + rootDirectoriesNames);
         return rootDirectoriesNames;
     }
 
+    @SuppressWarnings("unused")
     private static void computeStats(Stream<Pathway> pathwaysStream, PathwayMatrixBuilder pathwayMatrixBuilder,
             PathwayImageBuilder pathwayImageBuilder)
             throws IOException {

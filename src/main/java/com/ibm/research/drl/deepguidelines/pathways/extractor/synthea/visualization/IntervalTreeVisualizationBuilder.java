@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
 
 @Service
@@ -64,17 +64,17 @@ public class IntervalTreeVisualizationBuilder extends AbstractVisualizationBuild
             "";
 
     public IntervalTreeVisualizationBuilder(
-            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
+            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.output.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
         super(patientIdsForWhichWeWantVisualizations);
     }
 
-    public void buildVisualization(InMemoryDataProvider inMemoryDataProvider) {
+    public void buildVisualization(DataProvider dataProvider) {
         if (patientIdsForWhichWeWantVisualizations.isPresent()) {
             for (String patientId : patientIdsForWhichWeWantVisualizations.get()) {
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(HTML_OUTPUT_PREFIX);
-                sb.append(inMemoryDataProvider.produceJavascriptDataForIntervalTreeVisualization(patientId));
+                sb.append(dataProvider.produceJavascriptDataForIntervalTreeVisualization(patientId));
                 sb.append(HTML_OUTPUT_SUFFIX);
                 try {
                     Path path = FileUtils.writeToTempFile(
