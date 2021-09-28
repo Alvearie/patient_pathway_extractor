@@ -25,6 +25,7 @@ public class SimpleDataProvider extends AbstractDataProvider {
         this.includedSyntheaMedicalTypes = includedSyntheaMedicalTypes;
         this.includedConditionsCodes = includedConditionsCodes;
         this.inputDataParser = inputDataParser;
+        this.patientsIndex = inputDataParser.getPatients(inputDataPath);
     }
 
     @Override
