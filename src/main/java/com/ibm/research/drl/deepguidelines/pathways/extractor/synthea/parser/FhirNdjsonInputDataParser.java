@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,7 @@ import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
 
@@ -191,6 +193,7 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
         private final String filePath;
         private final long totalNumberOfLines;
         private CsvParser csvParser;
+        private SyntheaMedicalTypes medicalType;
         private FHIRResourceType.Value fhirMedicalType;
         private BufferedReader reader;
 
@@ -202,6 +205,7 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
 
         public IteratorOfRecords(String inputDataPath, SyntheaMedicalTypes medicalType) {
             super();
+            this.medicalType = medicalType;
             this.fhirMedicalType = getFhirMedicalType(medicalType);
             this.filePath = inputDataPath + Commons.FHIR_FILE_NAMES.get(fhirMedicalType);
 
@@ -215,20 +219,21 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
                     csvParser = new CsvParser(csvParserSettings);
 
                     // Add column headers
-                    StringBuilder sb = new StringBuilder();
+                    List<String> columnHeaders = new ObjectArrayList<>();
                     if (!SyntheaMedicalTypes.PATIENTS.equals(medicalType)) {
-                        sb.append(String.join(",", Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType)));
-                        sb.append("," + Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
-                        sb.append("," + Commons.SYNTHEA_EVENT_COLUMN_NAME.get(medicalType));
+                        columnHeaders.addAll(Arrays.asList(Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType)));
+                        columnHeaders.add(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
+                        columnHeaders.add(Commons.SYNTHEA_EVENT_COLUMN_NAME.get(medicalType));
                         if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
-                            sb.append(",START,STOP");
+                            columnHeaders.add("START");
+                            columnHeaders.add("STOP");
                         } else {
-                            sb.append(",DATE");
+                            columnHeaders.add("DATE");
                         }
                     } else {
-                        sb.append(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
+                        columnHeaders.add(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
                     }
-                    csvParser.parseRecord(sb.toString());
+                    csvParser.parseRecord(String.join(",", columnHeaders));
 
                     updateState();
                     
@@ -278,9 +283,15 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
                             if (startDate != null && !startDate.isEmpty()) {
                                 validStartDate = true;
                                 List<String> columnValues = new ArrayList<>();
-                                for (String featureFhirPathExpression : Commons.FHIR_FEATURE_ELEMENT_FHIRPATHS.get(fhirMedicalType)) {
+                                String[] featureFhirPathExpressions = Commons.FHIR_FEATURE_ELEMENT_FHIRPATHS.get(fhirMedicalType);
+                                for (String featureFhirPathExpression : featureFhirPathExpressions) {
                                     String featureValue = getNodeValueAsString(getElementNodes(resource, featureFhirPathExpression));
                                     columnValues.add(featureValue == null ? EMPTY_STRING : featureValue);
+                                }
+                                if (featureFhirPathExpressions.length < Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType).length) {
+                                    for (int i=0; i<Commons.SYNTHEA_FEATURE_COLUMN_NAMES.get(medicalType).length-featureFhirPathExpressions.length; ++i) {
+                                        columnValues.add(EMPTY_STRING);
+                                    }
                                 }
                                 String patientId = getPatientId(resource, fhirMedicalType);
                                 columnValues.add(patientId == null ? EMPTY_STRING : patientId);
@@ -316,17 +327,4 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
         
     }
 
-    public static void main(String[] args) {
-        FhirNdjsonInputDataParser parser = new FhirNdjsonInputDataParser(java.time.Instant.now().toEpochMilli());
-//        for (SyntheaMedicalTypes medicalType : SyntheaMedicalTypes.values()) {
-//            parser.readAsStreamOfRecords("c:\\synthea\\output2\\fhir\\", medicalType)
-//                .forEach(record -> {
-//                    System.out.println(record.toString());
-//            });
-//        }
-        parser.readAsStreamOfRecords("c:\\synthea\\output\\fhir\\", SyntheaMedicalTypes.IMAGING_STUDIES)
-            .forEach(record -> {
-                System.out.println(record.toString());
-            });
-    }
 }

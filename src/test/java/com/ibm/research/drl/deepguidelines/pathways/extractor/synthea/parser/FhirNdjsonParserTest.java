@@ -19,9 +19,11 @@ public class FhirNdjsonParserTest {
 
     private static final String INPUT_DATA_PATH = "simple_dataset_to_test_fhir_ndjson_parser/";
     private static final String[] expectedAllergyIntoleranceRecords = {
+            // CODE,PATIENT,ENCOUNTER,DATE
             "10831, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, null, 1999-02-20T11:31:00Z"
     };
     private static final String[] expectedCarePlanRecords = {
+            // CODE,PATIENT,ID,START,STOP
             "386463000, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T08:31:00Z, null",
             "58332002, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, b4ce28e4-1cfe-4b7c-e2a3-1f7cb6c2f546, 1999-02-20T11:55:48Z, null",
             "304510005, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 4eade156-3e80-e115-06f6-978be4923bc2, 2014-02-01T03:49:16Z, 2014-02-08T03:49:16Z",
@@ -29,6 +31,7 @@ public class FhirNdjsonParserTest {
             "444908001, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 91dea1bf-0660-bc60-e03b-e641b5efff7a, 2020-03-03T08:44:47Z, 2020-03-13T12:57:20Z"
     };
     private static final String[] expectedConditionRecords = {
+            // CODE,PATIENT,ENCOUNTER,START,STOP
             "59621000, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T08:31:00Z, null",
             "224355006, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T09:11:41Z, null",
             "105531004, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T09:11:41Z, null",
@@ -36,6 +39,7 @@ public class FhirNdjsonParserTest {
             "160903007, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T09:11:41Z, 1998-02-11T09:13:38Z"
     };
     private static final String[] expectedEncounterRecords = {
+            // PATIENT,ID,START,STOP
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T08:31:00Z, 1997-02-05T08:46:00Z",
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 00255dc4-8f27-7137-51c3-45513b2feda3, 1997-03-07T08:31:00Z, 1997-03-07T08:46:00Z",
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 578f73a2-71ce-1e63-5829-8f3770e38345, 1997-05-06T08:31:00Z, 1997-05-06T08:46:00Z",
@@ -43,6 +47,7 @@ public class FhirNdjsonParserTest {
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 8ddaf8de-d208-5b6f-46f1-841f693aa21c, 1999-02-06T20:31:00Z, 1999-02-06T20:46:00Z"
     };
     private static final String[] expectedImagingStudyRecords = {
+            // BODYSITE_CODE,MODALITY_CODE,PATIENT,ENCOUNTER,DATE
             "72696002, DX, d0027c78-054c-d1ec-6b74-98015caca830, 93ba6e8d-2322-2844-762f-5faf055afb21, 2019-05-21T09:03:51Z",
             "8205005, DX, 6a0aa707-09bb-c1f2-18af-a35834f53aeb, ae73befd-a62c-9096-8204-fc2d77c40f23, 2018-03-25T14:57:14Z",
             "51299004, DX, 7690d961-1a81-3686-bafa-857fb3f955a9, 81735039-305d-b442-2cf3-df6725c095ff, 2015-04-21T12:03:37Z",
@@ -50,6 +55,7 @@ public class FhirNdjsonParserTest {
             "72696002, DX, 3065ee0f-8cc5-9593-3a69-b687722f56c9, 3790bd7a-870e-1759-e95f-7b3db1c1172e, 2021-04-28T02:08:47Z"
     };
     private static final String[] expectedImmunizationRecords = {
+            // PATIENT,ENCOUNTER,DATE
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 968c485c-6e5b-310c-e2ae-90959071917d, 2012-08-01T08:31:00Z",
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, 7615a10c-2909-a7a3-8e02-544c3ea70f84, 2014-02-05T08:31:00Z",
@@ -57,13 +63,15 @@ public class FhirNdjsonParserTest {
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65, ab2cc031-12cc-e057-4db1-d553bd714e27, 2016-05-25T08:31:00Z"
     };
     private static final String[] expectedMedicationRequestRecords = {
-            "314076, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T08:31:00Z",
-            "308136, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 00255dc4-8f27-7137-51c3-45513b2feda3, 1997-03-07T08:31:00Z",
-            "310798, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 578f73a2-71ce-1e63-5829-8f3770e38345, 1997-05-06T08:31:00Z",
-            "310798, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 08521078-6543-50ae-5b9e-a06005a251ca, 1998-02-11T08:31:00Z",
-            "314076, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 08521078-6543-50ae-5b9e-a06005a251ca, 1998-02-11T08:31:00Z"
+            // CODE,DISPENSES,PATIENT,ENCOUNTER,DATE
+            "314076, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 5a28a2b8-839c-4fcd-afb1-414ab42cd8cf, 1997-02-05T08:31:00Z",
+            "308136, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 00255dc4-8f27-7137-51c3-45513b2feda3, 1997-03-07T08:31:00Z",
+            "310798, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 578f73a2-71ce-1e63-5829-8f3770e38345, 1997-05-06T08:31:00Z",
+            "310798, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 08521078-6543-50ae-5b9e-a06005a251ca, 1998-02-11T08:31:00Z",
+            "314076, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 08521078-6543-50ae-5b9e-a06005a251ca, 1998-02-11T08:31:00Z"
     };
     private static final String[] expectedObservationRecords = {
+            // CODE,VALUE,UNITS,PATIENT,ENCOUNTER,DATE
             "8302-2, 169.4, cm, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
             "72514-3, 0, {score}, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
             "29463-7, 85.1, kg, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
@@ -71,9 +79,11 @@ public class FhirNdjsonParserTest {
             "85354-9, null, null, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z"
     };
     private static final String[] expectedPatientRecords = {
+            // ID
             "6538eea4-ba8b-cb7c-a55e-ec9290821f65"
     };
     private static final String[] expectedProcedureRecords = {
+            // CODE,PATIENT,ENCOUNTER,DATE
             "710824005, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
             "430193006, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T08:31:00Z",
             "710841007, 6538eea4-ba8b-cb7c-a55e-ec9290821f65, 14e17aa8-2578-b283-e3ad-712cd9ad6644, 2012-05-02T09:29:30Z",
