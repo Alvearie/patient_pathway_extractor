@@ -51,12 +51,12 @@ public class Commons {
     public static final EnumMap<FHIRResourceType.Value, SyntheaMedicalTypes> FHIR_MEDICAL_TYPE_MAP = new EnumMap<>(FHIRResourceType.Value.class);
 
     public static final Set<FHIRResourceType.Value> FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS = new ObjectOpenHashSet<>(Arrays.asList(
-        FHIRResourceType.Value.ALLERGY_INTOLERANCE,
         FHIRResourceType.Value.CARE_PLAN,
         FHIRResourceType.Value.CONDITION,
         FHIRResourceType.Value.ENCOUNTER));
 
     public static final Set<FHIRResourceType.Value> FHIR_MEDICAL_TYPES_YIELDING_ISOLATED_PATHWAY_EVENTS = new ObjectOpenHashSet<>(Arrays.asList(
+        FHIRResourceType.Value.ALLERGY_INTOLERANCE,
         FHIRResourceType.Value.IMAGING_STUDY,
         FHIRResourceType.Value.IMMUNIZATION,
         FHIRResourceType.Value.MEDICATION_REQUEST,
@@ -146,7 +146,7 @@ public class Commons {
         FHIR_FILE_NAMES.put(FHIRResourceType.Value.PATIENT, "Patient.ndjson");
         FHIR_FILE_NAMES.put(FHIRResourceType.Value.PROCEDURE, "Procedure.ndjson");
         
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.onset.as(DateTime)");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.recordedDate");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.start");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.onset.as(DateTime)");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.start");
@@ -155,9 +155,8 @@ public class Commons {
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.MEDICATION_REQUEST, "MedicationRequest.authoredOn");
         FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.OBSERVATION, "Observation.effective.as(DateTime)");
         // patients have no start date
-        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.performed.as(DateTime)");
+        FHIR_START_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.PROCEDURE, "Procedure.performed.as(Period).start");
 
-        FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ALLERGY_INTOLERANCE, "AllergyIntolerance.lastOccurrence");
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CARE_PLAN, "CarePlan.period.end");
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.CONDITION, "Condition.abatement.as(DateTime)");
         FHIR_STOP_DATE_ELEMENT_FHIRPATH.put(FHIRResourceType.Value.ENCOUNTER, "Encounter.period.end");

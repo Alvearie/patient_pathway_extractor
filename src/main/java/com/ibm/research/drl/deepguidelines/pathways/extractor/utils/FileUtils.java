@@ -89,7 +89,7 @@ public class FileUtils {
     public static List<Resource> readFhirNdjsonFile(String fileName) throws Exception {
         List<Resource> resources = new ArrayList<>();
         
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(getFile(fileName)))) {
             String line;
             while((line = bufferedReader.readLine()) != null) {
                 try (StringReader resourceReader = new StringReader(line)) {

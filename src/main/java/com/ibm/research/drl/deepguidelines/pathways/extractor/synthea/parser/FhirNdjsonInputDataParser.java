@@ -111,11 +111,19 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
     }
     
     private String getPatientId(Resource resource, FHIRResourceType.Value medicalType) throws FHIRPathException {
-        return getNodeValueAsString(getElementNodes(resource, Commons.FHIR_PATIENT_ELEMENT_FHIRPATH.get(medicalType)));
+        String patientId = getNodeValueAsString(getElementNodes(resource, Commons.FHIR_PATIENT_ELEMENT_FHIRPATH.get(medicalType)));
+        if (patientId != null && patientId.startsWith("Patient/")) {
+            patientId = patientId.substring("Patient/".length());
+        }
+        return patientId;
     }
 
     private String getEventId(Resource resource, FHIRResourceType.Value medicalType) throws FHIRPathException {
-        return getNodeValueAsString(getElementNodes(resource, Commons.FHIR_EVENT_ELEMENT_FHIRPATH.get(medicalType)));
+        String eventId = getNodeValueAsString(getElementNodes(resource, Commons.FHIR_EVENT_ELEMENT_FHIRPATH.get(medicalType)));
+        if (eventId != null && eventId.startsWith("Encounter/")) {
+            eventId = eventId.substring("Encounter/".length());
+        }
+        return eventId;
     }
 
     private String getStartDate(Resource resource, FHIRResourceType.Value medicalType) throws FHIRPathException {
@@ -200,7 +208,7 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
             try {
                 this.totalNumberOfLines = FileUtils.computeNumberOfLines(filePath).orElse(-1L);
                 if (this.totalNumberOfLines > 0) {
-                    this.reader = new BufferedReader(new FileReader(filePath));
+                    this.reader = new BufferedReader(new FileReader(FileUtils.getFile(filePath)));
 
                     CsvParserSettings csvParserSettings = new CsvParserSettings();
                     csvParserSettings.setHeaderExtractionEnabled(true);
@@ -276,10 +284,8 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
                                 }
                                 String patientId = getPatientId(resource, fhirMedicalType);
                                 columnValues.add(patientId == null ? EMPTY_STRING : patientId);
-                                if (!FHIRResourceType.Value.PATIENT.equals(fhirMedicalType)) {
-                                    String eventId = getEventId(resource, fhirMedicalType);
-                                    columnValues.add(eventId == null ? EMPTY_STRING : eventId);
-                                }
+                                String eventId = getEventId(resource, fhirMedicalType);
+                                columnValues.add(eventId == null ? EMPTY_STRING : eventId);
                                 columnValues.add(startDate == null ? EMPTY_STRING : startDate);
                                 if (Commons.FHIR_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS.contains(fhirMedicalType)) {
                                     String stopDate = getStopDate(resource, fhirMedicalType);
@@ -310,4 +316,17 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
         
     }
 
+    public static void main(String[] args) {
+        FhirNdjsonInputDataParser parser = new FhirNdjsonInputDataParser(java.time.Instant.now().toEpochMilli());
+//        for (SyntheaMedicalTypes medicalType : SyntheaMedicalTypes.values()) {
+//            parser.readAsStreamOfRecords("c:\\synthea\\output2\\fhir\\", medicalType)
+//                .forEach(record -> {
+//                    System.out.println(record.toString());
+//            });
+//        }
+        parser.readAsStreamOfRecords("c:\\synthea\\output\\fhir\\", SyntheaMedicalTypes.IMAGING_STUDIES)
+            .forEach(record -> {
+                System.out.println(record.toString());
+            });
+    }
 }
