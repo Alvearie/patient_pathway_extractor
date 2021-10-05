@@ -96,7 +96,7 @@ If the configuration property `com.ibm.research.drl.deepguidelines.pathways.extr
 
 ### Pathway visualization
 
-![Pathway events timeline](images/vis_pathway_events_line_1993-04-16T00:00:00Z,2018-12-14T23:59:59Z,0007782f-ca96-4ad1-bdf7-516ab5dc1ef5,19f2e90e-6ae2-41ab-b953-215ba3964646.png)
+![Pathway events timeline](images/vis_pathway_events_line_example.png)
 
 - Horizontal bars represent events that have a start and stop date.
 - Dots represent isolated events (they happen at a certain date).
@@ -104,13 +104,13 @@ If the configuration property `com.ibm.research.drl.deepguidelines.pathways.extr
 
 ### PathwayMatrix visualization
 
-![Pathway Matrix](images/vis_pathway_matrix_1993-04-16T00:00:00Z,2018-12-14T23:59:59Z,0007782f-ca96-4ad1-bdf7-516ab5dc1ef5,19f2e90e-6ae2-41ab-b953-215ba3964646.png)
+![Pathway Matrix](images/vis_pathway_matrix_example.png)
 
 This is a visualization of the sparse 3D matrix that contains the data in `PathwayMatrix`. Each slice along the time axis gives the values of the different dimensions (conditions, medications, observations, etc.) at that time.
 
 ### PathwayImage visualization
 
-![Pathway Image](images/vis_pathway_image_1993-04-16T00:00:00Z,2018-12-14T23:59:59Z,0007782f-ca96-4ad1-bdf7-516ab5dc1ef5,19f2e90e-6ae2-41ab-b953-215ba3964646.png)
+![Pathway Image](images/vis_pathway_image_example.png)
 
 This is a visualization of the sparse 2D matrix that contains the data in `PathwayImage`. In this variant, each slice of the sparse 3D matrix above is trimmed to its last non empty cell, and then all slices are concatenated. The vertical axis corresponds to the different dimensions (conditions, medications, observations, etc.) shown in the `PathwayMatrix` visualization. The horizontal axis is time. The image above is only a partial view of the entire `PathwayImage`, which is much longer on the horizontal axis.
 
