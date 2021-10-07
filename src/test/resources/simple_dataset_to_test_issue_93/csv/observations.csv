@@ -1,4 +1,4 @@
-DATE,PATIENT,ENCOUNTER,CODE,DESCRIPTION,VALUE,UNITS,TYPE
-2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,33756-8,Polyp size greatest dimension by CAP cancer protocols,3.9,mm,numeric
-2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,57905-2,Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method,21.3,ng/mL,numeric
-2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,4548-4,Hemoglobin A1c/Hemoglobin.total in Blood,9.6,%,numeric
+DATE,PATIENT,ENCOUNTER,CATEGORY,CODE,DESCRIPTION,VALUE,UNITS,TYPE
+2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,,33756-8,Polyp size greatest dimension by CAP cancer protocols,3.9,mm,numeric
+2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,,57905-2,Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method,21.3,ng/mL,numeric
+2017-11-04,d805269e-4588-4fd1-b584-a02944590fbf,4ed5286f-fb5b-420e-836a-d948ee3c965b,,4548-4,Hemoglobin A1c/Hemoglobin.total in Blood,9.6,%,numeric

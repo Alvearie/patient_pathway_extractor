@@ -1,14 +1,16 @@
 package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.splitter;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,18 +20,16 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Commons;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.FileParsingUtils;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.InMemoryDataProviderBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwaysBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Patient;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.SyntheaMedicalTypes;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.PatientsParser;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.InputDataParser;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayImageBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayMatrixBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
-import com.univocity.parsers.common.record.Record;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -67,7 +67,7 @@ public class DatasetSplitterTest {
     private List<Pathway> getPathwaysOnSplittedData(String inputDirectoryName, long now, String[] includedPathwayEventMedicalTypes,
             int maxNumberOfPatientsPerChunk)
             throws IOException {
-        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName);
+        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
         String outputDirectoryName = Files.createTempDirectory("DatasetSplitter_test_").toString() + File.separator + UUID.randomUUID().toString();
         List<String> chunkRootDirectoryNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, outputDirectoryName);
 
@@ -83,10 +83,9 @@ public class DatasetSplitterTest {
     }
 
     private List<Pathway> getPathwaysFromDirectory(String inputDirectoryName, long now, String[] includedPathwayEventMedicalTypes) {
-        InMemoryDataProviderBuilder inMemoryDataProviderBuilder = new InMemoryDataProviderBuilder(now, includedPathwayEventMedicalTypes);
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(inputDirectoryName);
-        PathwaysBuilder pathwaysBuilder = new PathwaysBuilder(new String[] {}, now);
-        return pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        InMemoryDataProviderBuilder inMemoryDataProviderBuilder = new InMemoryDataProviderBuilder(includedPathwayEventMedicalTypes, new String[] {});
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(inputDirectoryName, new SyntheaCsvInputDataParser(now));
+        return dataProvider.getPathways().collect(Collectors.toList());
     }
 
     @Test
@@ -125,7 +124,7 @@ public class DatasetSplitterTest {
     private List<String> getPathwayImagesOnSplittedData(String inputDirectoryName, long now, String[] includedPathwayEventMedicalTypes,
             int maxNumberOfPatientsPerChunk, int maxColumns)
             throws IOException {
-        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName);
+        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName, new SyntheaCsvInputDataParser(now));
         String outputDirectoryName = Files.createTempDirectory("DatasetSplitter_test_").toString() + File.separator + UUID.randomUUID().toString();
         List<String> chunkRootDirectoryNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, outputDirectoryName);
 
@@ -138,13 +137,11 @@ public class DatasetSplitterTest {
 
     private List<String> getPathwayImagesFromDirectory(String inputDirectoryName, long now, String[] includedPathwayEventMedicalTypes,
             int maxColumns) {
-        InMemoryDataProviderBuilder inMemoryDataProviderBuilder = new InMemoryDataProviderBuilder(now, includedPathwayEventMedicalTypes);
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(inputDirectoryName);
-        PathwaysBuilder pathwaysBuilder = new PathwaysBuilder(new String[] {}, now);
+        InMemoryDataProviderBuilder inMemoryDataProviderBuilder = new InMemoryDataProviderBuilder(includedPathwayEventMedicalTypes, new String[] {});
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(inputDirectoryName, new SyntheaCsvInputDataParser(now));
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayImageBuilder pathwayImageBuilder = new PathwayImageBuilder();
-        return pathwaysBuilder
-                .build(dataProvider)
+        return dataProvider.getPathways()
                 .map(pathway -> pathwayMatrixBuilder.build(pathway))
                 .map(pathwayMatrix -> pathwayImageBuilder.trimAndConcatenateSlices(pathwayMatrix))
                 .filter(pathwayImage -> pathwayImage.columns() <= maxColumns)
@@ -160,24 +157,24 @@ public class DatasetSplitterTest {
     @Test
     public void testThatEachChunkIsConsistent() throws IOException {
         String inputDirectoryName = "synthea_10_patients_seed_3/csv/";
-        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName);
+        long now = Instant.parse(LocalDate.now() + Commons.INSTANT_END_OF_DAY).toEpochMilli();
+        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName, new SyntheaCsvInputDataParser(now));
         int maxNumberOfPatientsPerChunk = 5;
         String outputDirectoryName = Files.createTempDirectory("DatasetSplitter_test_").toString() + File.separator + UUID.randomUUID().toString();
         List<String> chunkRootDirectoryNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, outputDirectoryName);
+        InputDataParser inputDataParser = new SyntheaCsvInputDataParser(now);
 
         for (String chunkRootDirectoryName : chunkRootDirectoryNames) {
-            Map<String, Patient> patientsInChunk = new PatientsParser(chunkRootDirectoryName).parse();
+            Map<String, Patient> patientsInChunk = inputDataParser.getPatients(chunkRootDirectoryName);
             Set<String> seenPatients = new ObjectOpenHashSet<>();
             for (SyntheaMedicalTypes syntheaType : SyntheaMedicalTypes.values()) {
-                String fileName = Commons.SYNTHEA_FILE_NAMES.get(syntheaType);
-                Iterator<Record> records = FileParsingUtils.getAsIteratorOfRecords(chunkRootDirectoryName + fileName);
-                while (records.hasNext()) {
-                    Record record = records.next();
-                    String patientId = record.getString(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(syntheaType));
-                    assertThat(patientId, notNullValue());
-                    assertThat(patientsInChunk.containsKey(patientId), is(true));
-                    seenPatients.add(patientId);
-                }
+                inputDataParser.readAsStreamOfRecords(chunkRootDirectoryName, syntheaType)
+                    .forEach(record -> {
+                        String patientId = record.getString(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(syntheaType));
+                        assertThat(patientId, notNullValue());
+                        assertThat(patientsInChunk.containsKey(patientId), is(true));
+                        seenPatients.add(patientId);
+                    });
             }
             assertThat(seenPatients, equalTo(patientsInChunk.keySet()));
         }
@@ -186,7 +183,8 @@ public class DatasetSplitterTest {
     @Test
     public void testThatTheUnionOfChunkedFilesIsEqualToTheInputFiles() throws IOException {
         String inputDirectoryName = "synthea_10_patients_seed_3/csv/";
-        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName);
+        long now = Instant.parse(LocalDate.now() + Commons.INSTANT_END_OF_DAY).toEpochMilli();
+        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName, new SyntheaCsvInputDataParser(now));
         int maxNumberOfPatientsPerChunk = 5;
         String outputDirectoryName = Files.createTempDirectory("DatasetSplitter_test_").toString() + File.separator + UUID.randomUUID().toString();
         List<String> chunkRootDirectoryNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, outputDirectoryName);
@@ -211,7 +209,8 @@ public class DatasetSplitterTest {
     @Test
     public void testThatThereAreMaxNumberOfPatientsPerChunk() throws IOException {
         String inputDirectoryName = "synthea_10_patients_seed_3/csv/";
-        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName);
+        long now = Instant.parse(LocalDate.now() + Commons.INSTANT_END_OF_DAY).toEpochMilli();
+        DatasetSplitter datasetSplitter = new DatasetSplitter(inputDirectoryName, new SyntheaCsvInputDataParser(now));
         int maxNumberOfPatientsPerChunk = 5;
         String outputDirectoryName = Files.createTempDirectory("DatasetSplitter_test_").toString() + File.separator + UUID.randomUUID().toString();
         List<String> chunkRootDirectoryNames = datasetSplitter.split(maxNumberOfPatientsPerChunk, outputDirectoryName);

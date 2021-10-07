@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.testutils.DifferenceUtils;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -29,7 +31,7 @@ public class SimpleDataProviderTest {
     @Autowired
     private SimpleDataProviderBuilder simpleDataProviderBuilder;
 
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     @Test
@@ -74,9 +76,15 @@ public class SimpleDataProviderTest {
         expectedPathwayEventsLine.add(
                 new PathwayEvent(
                         SyntheaMedicalTypes.PROCEDURES,
-                        PathwayEventTemporalType.ISOLATED,
+                        PathwayEventTemporalType.START,
                         "Medication_2",
-                        Instant.parse("2009-11-18" + Commons.INSTANT_END_OF_DAY).toEpochMilli()));
+                        Instant.parse("2009-11-18" + Commons.INSTANT_START_OF_DAY).toEpochMilli()));
+        expectedPathwayEventsLine.add(
+            new PathwayEvent(
+                    SyntheaMedicalTypes.PROCEDURES,
+                    PathwayEventTemporalType.STOP,
+                    "Medication_2",
+                    Instant.parse("2009-11-18" + Commons.INSTANT_END_OF_DAY).toEpochMilli()));
         expectedPathwayEventsLine.add(
                 new PathwayEvent(
                         SyntheaMedicalTypes.ENCOUNTERS,
@@ -130,7 +138,7 @@ public class SimpleDataProviderTest {
                 PathwayEventTemporalType.STOP,
                 "Condition_3",
                 Instant.parse("2010-03-31" + Commons.INSTANT_END_OF_DAY).toEpochMilli());
-        DataProvider dataProvider = simpleDataProviderBuilder.build(syntheaDataPath);
+        DataProvider dataProvider = simpleDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
         PathwayEventsLine actualPathwayEventsLine = dataProvider.getPathwayEventsLine(startPathwayEvent, stopPathwayEvent, "Patient_1");
         if (!actualPathwayEventsLine.equals(expectedPathwayEventsLine)) {
             String diff = DifferenceUtils.diff(

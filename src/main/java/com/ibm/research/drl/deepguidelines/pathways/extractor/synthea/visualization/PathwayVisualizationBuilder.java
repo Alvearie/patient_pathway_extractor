@@ -11,13 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEvent;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventFeature;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventFeatures;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventTemporalType;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventsLine;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -58,7 +58,7 @@ public class PathwayVisualizationBuilder extends AbstractVisualizationBuilder {
             "</html>\n";
 
     public PathwayVisualizationBuilder(
-            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
+            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.output.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
         super(patientIdsForWhichWeWantVisualizations);
     }
 

@@ -1,48 +1,48 @@
-ID,START,STOP,PATIENT,ENCOUNTERCLASS,CODE,DESCRIPTION,COST,REASONCODE,REASONDESCRIPTION
-Condition_1,1981-11-11T07:50:07Z,1981-11-11T08:05:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Condition_2,2000-02-01T07:50:07Z,2000-02-01T08:05:07Z,Patient_1,ambulatory,185345009,Encounter for symptom,129.16,444814009,Viral sinusitis (disorder)
-Medication_1,2007-11-29T07:50:07Z,2007-11-29T08:44:07Z,Patient_1,outpatient,698314001,Consultation for treatment,129.16,,
-Condition_3,2009-07-27T07:50:07Z,2009-07-27T08:05:07Z,Patient_1,outpatient,185345009,Encounter for symptom,129.16,65363002,Otitis media
-Medication_2,2009-11-18T07:50:07Z,2009-11-18T08:23:07Z,Patient_1,outpatient,698314001,Consultation for treatment,129.16,,
-Immunization_1,2010-03-31T07:50:07Z,2010-03-31T08:05:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Procedure_1,2010-09-29T07:50:07Z,2010-09-29T08:50:07Z,Patient_1,outpatient,308335008,Patient encounter procedure,129.16,,
-Condition_4,2010-12-01T07:50:07Z,2010-12-01T13:05:07Z,Patient_1,ambulatory,424441002,Prenatal initial visit,129.16,72892002,Normal pregnancy
-Procedure_2,2010-12-29T07:50:07Z,2010-12-29T08:50:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_3,2011-01-26T07:50:07Z,2011-01-26T09:05:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_4,2011-02-23T07:50:07Z,2011-02-23T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_5,2011-03-23T07:50:07Z,2011-03-23T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_6,2011-04-20T07:50:07Z,2011-04-20T09:20:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_7,2011-05-18T07:50:07Z,2011-05-18T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_8,2011-06-15T07:50:07Z,2011-06-15T08:50:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_9,2011-06-29T07:50:07Z,2011-06-29T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_10,2011-07-06T07:50:07Z,2011-07-06T09:20:07Z,Patient_1,emergency,183460006,Obstetric emergency hospital admission,129.16,72892002,Normal pregnancy
-Procedure_11,2011-08-17T07:50:07Z,2011-08-17T08:35:07Z,Patient_1,ambulatory,169762003,Postnatal visit,129.16,,
-Condition_5,2011-11-13T07:50:07Z,2011-11-13T08:05:07Z,Patient_1,ambulatory,185345009,Encounter for symptom,129.16,444814009,Viral sinusitis (disorder)
-Condition_6,2012-04-04T07:50:07Z,2012-04-04T08:20:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Medication_3,2012-04-25T07:50:07Z,2012-04-25T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Medication_4,2012-08-11T07:50:07Z,2012-08-11T08:39:07Z,Patient_1,outpatient,698314001,Consultation for treatment,129.16,,
-Medication_5,2013-04-25T07:50:07Z,2013-04-25T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Medication_6,2013-08-06T07:50:07Z,2013-08-06T08:05:07Z,Patient_1,outpatient,698314001,Consultation for treatment,129.16,,
-Immunization_2,2014-04-09T07:50:07Z,2014-04-09T08:05:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Medication_7,2014-04-25T07:50:07Z,2014-04-25T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Medication_8,2015-04-25T07:50:07Z,2015-04-25T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Immunization_3,2015-12-09T07:50:07Z,2015-12-09T08:20:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Procedure_12,2016-04-20T07:50:07Z,2016-04-20T08:26:07Z,Patient_1,outpatient,308335008,Patient encounter procedure,129.16,,
-Medication_9,2016-04-24T07:50:07Z,2016-04-24T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Condition_7,2016-06-22T07:50:07Z,2016-06-22T13:05:07Z,Patient_1,ambulatory,424441002,Prenatal initial visit,129.16,72892002,Normal pregnancy
-Procedure_13,2016-07-20T07:50:07Z,2016-07-20T08:50:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_14,2016-08-17T07:50:07Z,2016-08-17T09:05:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_15,2016-09-14T07:50:07Z,2016-09-14T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_16,2016-10-12T07:50:07Z,2016-10-12T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_17,2016-11-09T07:50:07Z,2016-11-09T09:20:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_18,2016-12-07T07:50:07Z,2016-12-07T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Immunization_4,2016-12-14T07:50:07Z,2016-12-14T08:20:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Procedure_19,2017-01-04T07:50:07Z,2017-01-04T08:50:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_20,2017-01-18T07:50:07Z,2017-01-18T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_21,2017-01-25T07:50:07Z,2017-01-25T08:35:07Z,Patient_1,ambulatory,424619006,Prenatal visit,129.16,72892002,Normal pregnancy
-Procedure_22,2017-02-01T07:50:07Z,2017-02-01T09:20:07Z,Patient_1,emergency,183460006,Obstetric emergency hospital admission,129.16,72892002,Normal pregnancy
-Procedure_23,2017-03-15T07:50:07Z,2017-03-15T08:35:07Z,Patient_1,ambulatory,169762003,Postnatal visit,129.16,,
-Medication_10,2017-04-24T07:50:07Z,2017-04-24T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
-Condition_8,2017-11-25T07:50:07Z,2018-01-09T07:50:07Z,Patient_1,ambulatory,185345009,Encounter for symptom,129.16,38822007,Cystitis
-Immunization_5,2017-12-20T07:50:07Z,2017-12-20T08:20:07Z,Patient_1,wellness,185349003,Encounter for check up (procedure),129.16,,
-Medication_11,2018-04-24T07:50:07Z,2018-04-24T08:05:07Z,Patient_1,ambulatory,390906007,Follow-up encounter,129.16,55822004,Hyperlipidemia
+ID,START,STOP,PATIENT,ORGANIZATION,PROVIDER,PAYER,ENCOUNTERCLASS,CODE,DESCRIPTION,BASE_ENCOUNTER_COST,TOTAL_CLAIM_COST,PAYER_COVERAGE,REASONCODE,REASONDESCRIPTION
+Condition_1,1981-11-11T07:50:07Z,1981-11-11T08:05:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Condition_2,2000-02-01T07:50:07Z,2000-02-01T08:05:07Z,Patient_1,,,,ambulatory,185345009,Encounter for symptom,129.16,129.16,,444814009,Viral sinusitis (disorder)
+Medication_1,2007-11-29T07:50:07Z,2007-11-29T08:44:07Z,Patient_1,,,,outpatient,698314001,Consultation for treatment,129.16,129.16,,,
+Condition_3,2009-07-27T07:50:07Z,2009-07-27T08:05:07Z,Patient_1,,,,outpatient,185345009,Encounter for symptom,129.16,129.16,,65363002,Otitis media
+Medication_2,2009-11-18T07:50:07Z,2009-11-18T08:23:07Z,Patient_1,,,,outpatient,698314001,Consultation for treatment,129.16,129.16,,,
+Immunization_1,2010-03-31T07:50:07Z,2010-03-31T08:05:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Procedure_1,2010-09-29T07:50:07Z,2010-09-29T08:50:07Z,Patient_1,,,,outpatient,308335008,Patient encounter procedure,129.16,129.16,,,
+Condition_4,2010-12-01T07:50:07Z,2010-12-01T13:05:07Z,Patient_1,,,,ambulatory,424441002,Prenatal initial visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_2,2010-12-29T07:50:07Z,2010-12-29T08:50:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_3,2011-01-26T07:50:07Z,2011-01-26T09:05:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_4,2011-02-23T07:50:07Z,2011-02-23T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_5,2011-03-23T07:50:07Z,2011-03-23T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_6,2011-04-20T07:50:07Z,2011-04-20T09:20:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_7,2011-05-18T07:50:07Z,2011-05-18T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_8,2011-06-15T07:50:07Z,2011-06-15T08:50:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_9,2011-06-29T07:50:07Z,2011-06-29T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_10,2011-07-06T07:50:07Z,2011-07-06T09:20:07Z,Patient_1,,,,emergency,183460006,Obstetric emergency hospital admission,129.16,129.16,,72892002,Normal pregnancy
+Procedure_11,2011-08-17T07:50:07Z,2011-08-17T08:35:07Z,Patient_1,,,,ambulatory,169762003,Postnatal visit,129.16,129.16,,,
+Condition_5,2011-11-13T07:50:07Z,2011-11-13T08:05:07Z,Patient_1,,,,ambulatory,185345009,Encounter for symptom,129.16,129.16,,444814009,Viral sinusitis (disorder)
+Condition_6,2012-04-04T07:50:07Z,2012-04-04T08:20:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Medication_3,2012-04-25T07:50:07Z,2012-04-25T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Medication_4,2012-08-11T07:50:07Z,2012-08-11T08:39:07Z,Patient_1,,,,outpatient,698314001,Consultation for treatment,129.16,129.16,,,
+Medication_5,2013-04-25T07:50:07Z,2013-04-25T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Medication_6,2013-08-06T07:50:07Z,2013-08-06T08:05:07Z,Patient_1,,,,outpatient,698314001,Consultation for treatment,129.16,129.16,,,
+Immunization_2,2014-04-09T07:50:07Z,2014-04-09T08:05:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Medication_7,2014-04-25T07:50:07Z,2014-04-25T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Medication_8,2015-04-25T07:50:07Z,2015-04-25T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Immunization_3,2015-12-09T07:50:07Z,2015-12-09T08:20:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Procedure_12,2016-04-20T07:50:07Z,2016-04-20T08:26:07Z,Patient_1,,,,outpatient,308335008,Patient encounter procedure,129.16,129.16,,,
+Medication_9,2016-04-24T07:50:07Z,2016-04-24T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Condition_7,2016-06-22T07:50:07Z,2016-06-22T13:05:07Z,Patient_1,,,,ambulatory,424441002,Prenatal initial visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_13,2016-07-20T07:50:07Z,2016-07-20T08:50:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_14,2016-08-17T07:50:07Z,2016-08-17T09:05:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_15,2016-09-14T07:50:07Z,2016-09-14T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_16,2016-10-12T07:50:07Z,2016-10-12T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_17,2016-11-09T07:50:07Z,2016-11-09T09:20:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_18,2016-12-07T07:50:07Z,2016-12-07T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Immunization_4,2016-12-14T07:50:07Z,2016-12-14T08:20:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Procedure_19,2017-01-04T07:50:07Z,2017-01-04T08:50:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_20,2017-01-18T07:50:07Z,2017-01-18T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_21,2017-01-25T07:50:07Z,2017-01-25T08:35:07Z,Patient_1,,,,ambulatory,424619006,Prenatal visit,129.16,129.16,,72892002,Normal pregnancy
+Procedure_22,2017-02-01T07:50:07Z,2017-02-01T09:20:07Z,Patient_1,,,,emergency,183460006,Obstetric emergency hospital admission,129.16,129.16,,72892002,Normal pregnancy
+Procedure_23,2017-03-15T07:50:07Z,2017-03-15T08:35:07Z,Patient_1,,,,ambulatory,169762003,Postnatal visit,129.16,129.16,,,
+Medication_10,2017-04-24T07:50:07Z,2017-04-24T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia
+Condition_8,2017-11-25T07:50:07Z,2018-01-09T07:50:07Z,Patient_1,,,,ambulatory,185345009,Encounter for symptom,129.16,129.16,,38822007,Cystitis
+Immunization_5,2017-12-20T07:50:07Z,2017-12-20T08:20:07Z,Patient_1,,,,wellness,185349003,Encounter for check up (procedure),129.16,129.16,,,
+Medication_11,2018-04-24T07:50:07Z,2018-04-24T08:05:07Z,Patient_1,,,,ambulatory,390906007,Follow-up encounter,129.16,129.16,,55822004,Hyperlipidemia

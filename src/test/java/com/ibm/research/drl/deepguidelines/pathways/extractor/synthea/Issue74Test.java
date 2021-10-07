@@ -19,6 +19,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.AliveOutcomePathwayMatrixCell;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.ConditionsPathwayMatrixCell;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.DemographicsPathwayMatrixCell;
@@ -88,16 +91,13 @@ public class Issue74Test {
     @Autowired
     private InMemoryDataProviderBuilder inMemoryDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     @Test
     public void testThatPathwayEventsLineAreEquals() throws IOException {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways().collect(Collectors.toList());
         assertThat(actualPathways, notNullValue());
         assertThat(actualPathways.size(), equalTo(1));
         PathwayEventsLine actualPathwayEventsLine = actualPathways.get(0).getPathwayEventsLine();
@@ -108,8 +108,8 @@ public class Issue74Test {
 
     @Test
     public void testThatPathwayMatricesAreEqual() {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways().collect(Collectors.toList());
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayMatrix actualPathwayMatrix = pathwayMatrixBuilder.build(actualPathways.get(0));
         PathwayMatrix expectedPathwayMatrix = getExpectedPathwayMatrix();
@@ -118,8 +118,8 @@ public class Issue74Test {
     
     @Test
     public void testThatPahtwayImagesWithTrimmedAndConcatenateSlicesAreEqual() {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways().collect(Collectors.toList());
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayMatrix actualPathwayMatrix = pathwayMatrixBuilder.build(actualPathways.get(0));
         PathwayImageBuilder pathwayImageBuilder = new PathwayImageBuilder();
@@ -130,8 +130,8 @@ public class Issue74Test {
     
     @Test
     public void testThatPahtwayImagesWithCollapsedSlicesAreEqual() {
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder.build(dataProvider).collect(Collectors.toList());
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways().collect(Collectors.toList());
         PathwayMatrixBuilder pathwayMatrixBuilder = new PathwayMatrixBuilder(dataProvider);
         PathwayMatrix actualPathwayMatrix = pathwayMatrixBuilder.build(actualPathways.get(0));
         PathwayImageBuilder pathwayImageBuilder = new PathwayImageBuilder();

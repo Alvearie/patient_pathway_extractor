@@ -3,6 +3,7 @@ package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayImage;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayImageBuilder;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.pathwaymatrix.PathwayMatrix;
@@ -27,18 +31,14 @@ public class Issue93Test {
     @Autowired
     private InMemoryDataProviderBuilder inMemoryDataProviderBuilder;
     
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-    
     @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.output.pathway.image.max.columns}") 
     private int maxColumns;
     
     @Test
     public void test() {
         String syntheaDataPath = "simple_dataset_to_test_issue_93/csv/";
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<Pathway> actualPathways = pathwaysBuilder
-                .build(dataProvider)
+        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()));
+        List<Pathway> actualPathways = dataProvider.getPathways()
                 .collect(Collectors.toList());
         assertThat(actualPathways.size(), equalTo(1));
         Pathway pathway = actualPathways.get(0);

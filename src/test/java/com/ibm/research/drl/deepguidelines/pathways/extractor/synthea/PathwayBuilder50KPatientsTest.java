@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +24,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.testutils.DifferenceUtils;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.utils.FileUtils;
 
@@ -42,7 +45,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
  * You must specify the correct path of the 50000 Synthea dataset in the properties file
  * application_synthea_50K_patients_seed_3.properties, for example:
  *
- * com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path=/Users/marco/a/50k_patients_seed_3/csv/
+ * com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path=/Users/marco/a/50k_patients_seed_3/csv/
  */
 @Ignore
 @RunWith(SpringRunner.class)
@@ -60,10 +63,7 @@ public class PathwayBuilder50KPatientsTest {
     @Autowired
     private SimpleDataProviderBuilder simpleDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
-    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.data.path}")
+    @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.path}")
     private String syntheaDataPath;
 
     //    This file "synthea_50k_patients_seed_3_expected_pathways_ids.csv" contains the id of he expected pathways 
@@ -90,9 +90,8 @@ public class PathwayBuilder50KPatientsTest {
         Set<String> uniqueExpectedPathwaysIds = new ObjectOpenHashSet<>(expectedPathwaysIds);
         assertThat(uniqueExpectedPathwaysIds.size(), equalTo(expectedPathwaysIds.size()));
         LOG.info("***** the list of expected pathways ids have no duplicates");
-        DataProvider dataProvider = inMemoryDataProviderBuilder.build(syntheaDataPath);
-        List<String> actualPathwaysIds = pathwaysBuilder
-                .build(dataProvider)
+        List<String> actualPathwaysIds = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()))
+                .getPathways()
                 .map(Pathway::getId)
                 .collect(Collectors.toList());
         Set<String> uniqueActualPathwaysIds = new ObjectOpenHashSet<>(actualPathwaysIds);
@@ -129,13 +128,13 @@ public class PathwayBuilder50KPatientsTest {
 
     @Ignore
     public void testThatPathwaysAreEqual() {
-        Iterator<Pathway> actualPathways = pathwaysBuilder
-                .build(inMemoryDataProviderBuilder.build(syntheaDataPath))
+        Iterator<Pathway> actualPathways = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()))
+                .getPathways()
                 .limit(MAX_PATHWAYS)
                 .collect(Collectors.toList())
                 .iterator();
-        Stream<Pathway> expectedPathways = pathwaysBuilder
-                .build(simpleDataProviderBuilder.build(syntheaDataPath));
+        Stream<Pathway> expectedPathways = simpleDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(Instant.now().toEpochMilli()))
+                .getPathways();
         assertThat(expectedPathways, notNullValue());
         expectedPathways.forEach(expectedPathway -> {
             Pathway actualPathway = actualPathways.next();
