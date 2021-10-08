@@ -183,8 +183,16 @@ public class PathwayMatrixBuilder {
             Duration duration = Duration.between(start, stop);
             outcomePathwayMatrixCell = new AliveOutcomePathwayMatrixCell(duration.toDays());
         } else {
-            Instant start = Instant.parse(pathway.getPatient().getBirthdate() + Commons.INSTANT_START_OF_DAY);
-            Instant stop = Instant.parse(pathway.getPatient().getDeathdate() + Commons.INSTANT_END_OF_DAY);
+            String birthdate = pathway.getPatient().getBirthdate();
+            if (!birthdate.endsWith("Z")) {
+                birthdate = birthdate + Commons.INSTANT_START_OF_DAY;
+            }
+            String deathdate = pathway.getPatient().getDeathdate();
+            if (!deathdate.endsWith("Z")) {
+                deathdate = deathdate + Commons.INSTANT_END_OF_DAY;
+            }
+            Instant start = Instant.parse(birthdate); 
+            Instant stop = Instant.parse(deathdate);
             Duration duration = Duration.between(start, stop);
             outcomePathwayMatrixCell = new DeadOutcomePathwayMatrixCell(duration.toDays());
         }

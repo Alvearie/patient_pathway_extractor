@@ -53,7 +53,6 @@ public class PatientPathwayExtractor {
         if (!inputDataPath.endsWith(File.separator)) {
             inputDataPath = inputDataPath + File.separator;
         }
-        System.out.println("inputDataPath: " + inputDataPath);
         String inputDataFormat = contextEnvironment.getProperty("com.ibm.research.drl.deepguidelines.pathways.extractor.input.data.format");
         InputDataParser inputDataParser;
         long now = Instant.now().toEpochMilli();

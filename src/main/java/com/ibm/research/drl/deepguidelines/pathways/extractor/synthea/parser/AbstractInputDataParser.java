@@ -1,7 +1,6 @@
 package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser;
 
 import java.time.Instant;
-import java.time.temporal.ChronoField;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Commons;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEvent;
@@ -66,7 +65,6 @@ public abstract class AbstractInputDataParser implements InputDataParser {
     }
 
     private long getStart(Record record) {
-        System.out.println(record.toString());
         String start = record.getString("START");
         if (start == null) {
             return -1;
@@ -85,11 +83,6 @@ public abstract class AbstractInputDataParser implements InputDataParser {
             return Instant.parse(stop).toEpochMilli();
         } else {
             return Instant.parse(stop + Commons.INSTANT_END_OF_DAY).toEpochMilli();
-//            Instant stopDate = Instant.parse(stop);
-//            if (stopDate.get(ChronoField.SECOND_OF_DAY) == 0) {
-//                stopDate = stopDate.plusSeconds((24 * 60 * 60) - 1);
-//            }
-//            return stopDate.toEpochMilli();
         }
     }
 

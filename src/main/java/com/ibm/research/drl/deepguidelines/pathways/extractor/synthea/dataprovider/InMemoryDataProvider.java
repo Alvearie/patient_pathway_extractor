@@ -100,7 +100,6 @@ public class InMemoryDataProvider extends AbstractDataProvider {
             if (includedSyntheaMedicalTypes.contains(medicalType)) {
                 inputDataParser.readAsStreamOfRecords(inputDataPath, medicalType)
                         .forEach(record -> {
-                            System.out.println(record.toString());
                             PathwayEvent pathwayEvent = inputDataParser.getIsolatedPathwayEvent(record, medicalType);
                             if (pathwayEvent.getDate() == -1 || pathwayEvent.getEventId() == null) {
                                 LOG.error("bad date or eventId: " + record);

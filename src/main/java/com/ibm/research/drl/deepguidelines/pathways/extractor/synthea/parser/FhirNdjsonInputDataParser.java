@@ -91,11 +91,12 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
             for (Resource resource : FileUtils.readFhirNdjsonFile(inputDataPath + Commons.FHIR_FILE_NAMES.get(FHIRResourceType.Value.PATIENT))) {
                 com.ibm.fhir.model.resource.Patient fhirPatient = (com.ibm.fhir.model.resource.Patient) resource;
                 String id = fhirPatient.getId();
-                String birthDate = fhirPatient.getBirthDate().getValue() != null ? fhirPatient.getBirthDate().getValue().toString() : null;
+                String birthDate = fhirPatient.getBirthDate().getValue() != null ?
+                        DateTimeFormatter.ISO_LOCAL_DATE.format(fhirPatient.getBirthDate().getValue()) : null;
                 String deathDate = null;
                 Element deceased = fhirPatient.getDeceased();
                 if (deceased != null && deceased instanceof DateTime && deceased.hasValue()) {
-                    deathDate = ((DateTime)deceased).getValue().toString();
+                    deathDate = DateTimeFormatter.ISO_INSTANT.format(((DateTime)deceased).getValue());
                 }
                 String maritalStatus = null;
                 if (fhirPatient.getMaritalStatus() != null) {
@@ -328,7 +329,6 @@ public class FhirNdjsonInputDataParser extends AbstractInputDataParser {
                                     columnValues.add(stopDate == null ? EMPTY_STRING : stopDate);
                                 }
                                 nextRecord = csvParser.parseRecord(String.join(",", columnValues));
-                                System.out.println(nextRecord.toString());
                             }
                         } else {
                             validStartDate = true;
