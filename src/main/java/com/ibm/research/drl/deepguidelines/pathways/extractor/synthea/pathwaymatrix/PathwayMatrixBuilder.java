@@ -20,12 +20,12 @@ import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Commons;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.DataProvider;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Pathway;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEvent;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.PathwayEventFeature;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Patient;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.SyntheaMedicalTypes;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.DataProvider;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.longs.Long2ObjectRBTreeMap;
@@ -183,8 +183,16 @@ public class PathwayMatrixBuilder {
             Duration duration = Duration.between(start, stop);
             outcomePathwayMatrixCell = new AliveOutcomePathwayMatrixCell(duration.toDays());
         } else {
-            Instant start = Instant.parse(pathway.getPatient().getBirthdate() + Commons.INSTANT_START_OF_DAY);
-            Instant stop = Instant.parse(pathway.getPatient().getDeathdate() + Commons.INSTANT_END_OF_DAY);
+            String birthdate = pathway.getPatient().getBirthdate();
+            if (!birthdate.endsWith("Z")) {
+                birthdate = birthdate + Commons.INSTANT_START_OF_DAY;
+            }
+            String deathdate = pathway.getPatient().getDeathdate();
+            if (!deathdate.endsWith("Z")) {
+                deathdate = deathdate + Commons.INSTANT_END_OF_DAY;
+            }
+            Instant start = Instant.parse(birthdate); 
+            Instant stop = Instant.parse(deathdate);
             Duration duration = Duration.between(start, stop);
             outcomePathwayMatrixCell = new DeadOutcomePathwayMatrixCell(duration.toDays());
         }
@@ -212,8 +220,11 @@ public class PathwayMatrixBuilder {
             break;
 
         case MEDICATIONS:
-            pathwayMatrixCell = new MedicationsPathwayMatrixCell(pathwayEventFeature.get(0), Integer.valueOf(pathwayEventFeature.get(1)),
-                    pathwayEvent.getTemporalType());
+            int dispenses = 0;
+            try {
+                dispenses = Integer.valueOf(pathwayEventFeature.get(1));
+            } catch (Exception e) {};
+            pathwayMatrixCell = new MedicationsPathwayMatrixCell(pathwayEventFeature.get(0), dispenses, pathwayEvent.getTemporalType());
             break;
 
         case OBSERVATIONS:

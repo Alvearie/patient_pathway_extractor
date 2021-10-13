@@ -1,8 +1,10 @@
 package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
+import java.time.Instant;
 import java.util.Map;
 
 import org.junit.Test;
@@ -15,8 +17,8 @@ public class PatientsParserTest {
     
     @Test
     public void test() {
-        PatientsParser patientsParser = new PatientsParser(SYNTHEA_DATA_PATH);
-        Map<String, Patient> patientsMap = patientsParser.parse();
+        InputDataParser patientsParser = new SyntheaCsvInputDataParser(Instant.now().toEpochMilli());
+        Map<String, Patient> patientsMap = patientsParser.getPatients(SYNTHEA_DATA_PATH);
         assertThat(patientsMap, notNullValue());
         assertThat(patientsMap.size(), equalTo(55421));
         for (Patient patient : patientsMap.values()) {

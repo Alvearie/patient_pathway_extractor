@@ -3,6 +3,7 @@ package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.time.Instant;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.InMemoryDataProviderBuilder;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.SyntheaCsvInputDataParser;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.testutils.DifferenceUtils;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -33,17 +36,15 @@ public class PathwaysBuilderTest {
     @Autowired
     private SimpleDataProviderBuilder simpleDataProviderBuilder;
 
-    @Autowired
-    private PathwaysBuilder pathwaysBuilder;
-
     @Test
     public void testBuild() {
+        long now = Instant.now().toEpochMilli();
         String syntheaDataPath = "synthea_1_patient_seed_3/csv/";
-        List<Pathway> expectedPathways = pathwaysBuilder
-                .build(simpleDataProviderBuilder.build(syntheaDataPath))
+        List<Pathway> expectedPathways = simpleDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(now))
+                .getPathways()
                 .collect(Collectors.toList());
-        List<Pathway> actualPathways = pathwaysBuilder
-                .build(inMemoryDataProviderBuilder.build(syntheaDataPath))
+        List<Pathway> actualPathways = inMemoryDataProviderBuilder.build(syntheaDataPath, new SyntheaCsvInputDataParser(now))
+                .getPathways()
                 .collect(Collectors.toList());
         assertThat(actualPathways, notNullValue());
         assertThat(actualPathways.size(), equalTo(expectedPathways.size()));

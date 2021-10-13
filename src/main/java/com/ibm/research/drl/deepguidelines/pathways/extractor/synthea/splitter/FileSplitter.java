@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,8 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.Commons;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.FileParsingUtils;
 import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.SyntheaMedicalTypes;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.InputDataParser;
 import com.univocity.parsers.common.record.Record;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
@@ -29,13 +28,15 @@ public class FileSplitter {
     private static final byte[] NEW_LINE_BYTES = System.lineSeparator().getBytes();
 
     private final String inputDirectoryName;
+    private final InputDataParser inputDataParser;
 
-    public FileSplitter(String inputDirectoryName) {
+    public FileSplitter(String inputDirectoryName, InputDataParser inputDataParser) {
         this.inputDirectoryName = (inputDirectoryName.endsWith(File.separator)) ? inputDirectoryName : inputDirectoryName + File.separator;
+        this.inputDataParser = inputDataParser;
     }
 
     public void split(ChunksDirectoriesTree chunksDirectoriesTree, SyntheaMedicalTypes syntheaType) throws IOException {
-        String fileName = Commons.SYNTHEA_FILE_NAMES.get(syntheaType);
+        String fileName = inputDataParser.getFileName(syntheaType);
         LOG.info("splitting file " + fileName);
         List<String> chunkRootDirectoryNames = chunksDirectoriesTree.getChunkRootDirectoryNames();
         Set<RandomAccessFile> chunkRandomAccessFiles = new ObjectOpenHashSet<>(chunkRootDirectoryNames.size());
@@ -51,39 +52,42 @@ public class FileSplitter {
             chunkRootDirectoryName2fileChannel.put(chunkRootDirectoryName, chunkRandomAccessFile.getChannel());
             mustPrintColumnNamesForFileInChunkRootDirectoryName.put(chunkRootDirectoryName, true);
         }
-        Iterator<Record> iteratorOfRecord = FileParsingUtils.getAsIteratorOfRecords(inputDirectoryName + fileName);
-        String patientIdColumnName = Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(syntheaType);
-        while (iteratorOfRecord.hasNext()) {
-            Record record = iteratorOfRecord.next();
-            String patientId = record.getString(patientIdColumnName);
-            String chunkRootDirectoryName = chunksDirectoriesTree.getChunkRootDirectoryNameFor(patientId);
-            FileChannel fileChannel = chunkRootDirectoryName2fileChannel.get(chunkRootDirectoryName);
-            
-            if (chunkRootDirectoryName == null) {
-                LOG.error("chunkRootDirectoryName is null"
-                        + "; patientId = " + patientId
-                        + "; syntheaType = " + syntheaType
-                        + "; fileName = " + fileName
-                        + "; record = " + record);
-            }
-            
-            if (mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName) == null) {
-                LOG.error("mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName) is null"
-                        + "; chunkRootDirectoryName = " + chunkRootDirectoryName
-                        + "; patientId = " + patientId
-                        + "; syntheaType = " + syntheaType
-                        + "; fileName = " + fileName
-                        + "; record = " + record);
-            }
-            
-            if (mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName)) {
-                byte[] headerBytes = String.join(",", Commons.SYNTHEA_COLUMN_NAMES.get(syntheaType)).getBytes();
-                writeWithNewLine(headerBytes, fileChannel);
-                mustPrintColumnNamesForFileInChunkRootDirectoryName.put(chunkRootDirectoryName, false);
-            }
-            byte[] lineBytes = String.join(",", getAllValues(record, syntheaType)).getBytes();
-            writeWithNewLine(lineBytes, fileChannel);
-        }
+        inputDataParser.readAsStreamOfRecords(inputDirectoryName, syntheaType)
+            .forEach(record -> {
+                try {
+                    String patientId = inputDataParser.getPatientId(record, syntheaType);
+                    String chunkRootDirectoryName = chunksDirectoriesTree.getChunkRootDirectoryNameFor(patientId);
+                    FileChannel fileChannel = chunkRootDirectoryName2fileChannel.get(chunkRootDirectoryName);
+
+                    if (chunkRootDirectoryName == null) {
+                        LOG.error("chunkRootDirectoryName is null"
+                                + "; patientId = " + patientId
+                                + "; syntheaType = " + syntheaType
+                                + "; fileName = " + fileName
+                                + "; record = " + record);
+                    }
+
+                    if (mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName) == null) {
+                        LOG.error("mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName) is null"
+                                + "; chunkRootDirectoryName = " + chunkRootDirectoryName
+                                + "; patientId = " + patientId
+                                + "; syntheaType = " + syntheaType
+                                + "; fileName = " + fileName
+                                + "; record = " + record);
+                    }
+
+                    if (mustPrintColumnNamesForFileInChunkRootDirectoryName.get(chunkRootDirectoryName)) {
+                        byte[] headerBytes = String.join(",", Commons.SYNTHEA_COLUMN_NAMES.get(syntheaType)).getBytes();
+                        writeWithNewLine(headerBytes, fileChannel);
+                        mustPrintColumnNamesForFileInChunkRootDirectoryName.put(chunkRootDirectoryName, false);
+                    }
+                    byte[] lineBytes = String.join(",", getAllValues(record, syntheaType)).getBytes();
+                    writeWithNewLine(lineBytes, fileChannel);
+                } catch (IOException e) {
+                    LOG.error("failed to write split file output");
+                    throw new RuntimeException(e);
+                }
+            });
         for (FileChannel fileChannel : chunkRootDirectoryName2fileChannel.values()) {
             fileChannel.close();
         }

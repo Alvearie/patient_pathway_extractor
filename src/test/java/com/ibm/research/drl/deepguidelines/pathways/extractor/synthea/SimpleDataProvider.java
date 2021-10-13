@@ -1,32 +1,31 @@
 package com.ibm.research.drl.deepguidelines.pathways.extractor.synthea;
 
-import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.IsolatedPathwayEventParser;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.PatientsParser;
-import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.StartStopPathwayEventParser;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.AbstractDataProvider;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.dataprovider.FunctionFromRecordToOptionalPathway;
+import com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.parser.InputDataParser;
 
-public class SimpleDataProvider implements DataProvider {
+public class SimpleDataProvider extends AbstractDataProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(SimpleDataProvider.class);
     
-    // Map[PatientId, Patient]
-    private final Map<String, Patient> patientsIndex;
-
-    private final String dataPathName;
-    private final long now;
     private final Set<SyntheaMedicalTypes> includedSyntheaMedicalTypes;
+    private final Optional<Set<String>> includedConditionsCodes;
+    private final InputDataParser inputDataParser;
 
-    public SimpleDataProvider(String dataPathName, long now, Set<SyntheaMedicalTypes> includedSyntheaMedicalTypes) {
-        super();
-        this.dataPathName = dataPathName;
-        this.now = now;
+    public SimpleDataProvider(String inputDataPath, Set<SyntheaMedicalTypes> includedSyntheaMedicalTypes,
+            Optional<Set<String>> includedConditionsCodes, InputDataParser inputDataParser) {
+        super(inputDataPath);
         this.includedSyntheaMedicalTypes = includedSyntheaMedicalTypes;
-        this.patientsIndex = new PatientsParser(dataPathName).parse();
+        this.includedConditionsCodes = includedConditionsCodes;
+        this.inputDataParser = inputDataParser;
+        this.patientsIndex = inputDataParser.getPatients(inputDataPath);
     }
 
     @Override
@@ -45,34 +44,37 @@ public class SimpleDataProvider implements DataProvider {
     }
 
     @Override
-    public String getDataPathName() {
-        return dataPathName;
+    public String produceJavascriptDataForIntervalTreeVisualization(String patientId) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Stream<Pathway> getPathways() {
+        return buildPathways();
     }
 
     private PathwayEventsLine buildPathwayEventsLine(long pathwayStartDate, long pathwayStopDate, String patientId) {
         PathwayEventsLine pathwayEventsLine = new PathwayEventsLine();
-        StartStopPathwayEventParser startStopPathwayEventParser = new StartStopPathwayEventParser(now);
-        IsolatedPathwayEventParser isolatedPathwayEventParser = new IsolatedPathwayEventParser();
-        for (SyntheaMedicalTypes medicalType : Commons.SYNTHEA_MEDICAL_TYPES_YIELDING_START_STOP_PATHWAY_EVENTS) {
-            pathwayEventsLine.addAll(buildPathwayEventsLine(pathwayStartDate, pathwayStopDate, startStopPathwayEventParser, medicalType, patientId));
+        for (SyntheaMedicalTypes medicalType : inputDataParser.getMedicalTypesYieldingStartStopPathwayEvents()) {
+            pathwayEventsLine.addAll(buildStartStopPathwayEventsLine(pathwayStartDate, pathwayStopDate, medicalType, patientId));
         }
-        for (SyntheaMedicalTypes medicalType : Commons.SYNTHEA_MEDICAL_TYPES_YIELDING_ISOLATED_PATHWAY_EVENTS) {
-            pathwayEventsLine.addAll(buildPathwayEventsLine(pathwayStartDate, pathwayStopDate, isolatedPathwayEventParser, medicalType, patientId));
+        for (SyntheaMedicalTypes medicalType : inputDataParser.getMedicalTypesYieldingIsolatedPathwayEvents()) {
+            pathwayEventsLine.addAll(buildIsolatedPathwayEventsLine(pathwayStartDate, pathwayStopDate, medicalType, patientId));
         }
         return pathwayEventsLine;
     }
 
-    private PathwayEventsLine buildPathwayEventsLine(long pathwayStartDate, long pathwayStopDate,
-            StartStopPathwayEventParser startStopPathwayEventParser, SyntheaMedicalTypes medicalType, String patientId) {
+    private PathwayEventsLine buildStartStopPathwayEventsLine(long pathwayStartDate, long pathwayStopDate,
+            SyntheaMedicalTypes medicalType, String patientId) {
         PathwayEventsLine pathwayEventsLine = new PathwayEventsLine();
         Interval pathwayInterval = new Interval(pathwayStartDate, pathwayStopDate);
         if (includedSyntheaMedicalTypes.contains(medicalType)) {
-            FileParsingUtils.readAsStreamOfRecords(dataPathName + Commons.SYNTHEA_FILE_NAMES.get(medicalType))
+            inputDataParser.readAsStreamOfRecords(inputDataPath, medicalType)
                     .forEach(record -> {
                         String patientIdFromRecord = record.getString(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
                         if (patientId.equals(patientIdFromRecord)) {
-                            PathwayEvent startPathwayEvent = startStopPathwayEventParser.getStartPathwayEvent(record, medicalType);
-                            PathwayEvent stopPathwayEvent = startStopPathwayEventParser.getStopPathwayEvent(record, medicalType);
+                            PathwayEvent startPathwayEvent = inputDataParser.getStartPathwayEvent(record, medicalType);
+                            PathwayEvent stopPathwayEvent = inputDataParser.getStopPathwayEvent(record, medicalType);
                             long start = startPathwayEvent.getDate();
                             long stop = stopPathwayEvent.getDate();
                             if (stop < start)
@@ -92,21 +94,30 @@ public class SimpleDataProvider implements DataProvider {
         return pathwayEventsLine;
     }
 
-    private PathwayEventsLine buildPathwayEventsLine(long pathwayStartDate, long pathwayStopDate,
-            IsolatedPathwayEventParser isolatedPathwayEventParser, SyntheaMedicalTypes medicalType, String patientId) {
+    private PathwayEventsLine buildIsolatedPathwayEventsLine(long pathwayStartDate, long pathwayStopDate,
+            SyntheaMedicalTypes medicalType, String patientId) {
         PathwayEventsLine pathwayEventsLine = new PathwayEventsLine();
         if (includedSyntheaMedicalTypes.contains(medicalType)) {
-            FileParsingUtils.readAsStreamOfRecords(dataPathName + Commons.SYNTHEA_FILE_NAMES.get(medicalType))
+            inputDataParser.readAsStreamOfRecords(inputDataPath, medicalType)
                     .forEach(record -> {
                         String patientIdFromRecord = record.getString(Commons.SYNTHEA_PATIENT_COLUMN_NAME.get(medicalType));
                         if (patientId.equals(patientIdFromRecord)) {
-                            PathwayEvent pathwayEvent = isolatedPathwayEventParser.getIsolatedPathwayEvent(record, medicalType);
+                            PathwayEvent pathwayEvent = inputDataParser.getIsolatedPathwayEvent(record, medicalType);
                             if (pathwayEvent.getDate() >= pathwayStartDate && pathwayEvent.getDate() <= pathwayStopDate)
                                 pathwayEventsLine.add(pathwayEvent);
                         }
                     });
         }
         return pathwayEventsLine;
+    }
+
+    private Stream<Pathway> buildPathways() {
+        FunctionFromRecordToOptionalPathway functionFromRecordToOptionalPathway = new FunctionFromRecordToOptionalPathway(this,
+                inputDataParser, includedConditionsCodes);
+        return inputDataParser.readAsStreamOfRecords(inputDataPath, SyntheaMedicalTypes.CONDITIONS)
+                .map(functionFromRecordToOptionalPathway)
+                .filter(Optional::isPresent)
+                .map(Optional::get);
     }
 
 }

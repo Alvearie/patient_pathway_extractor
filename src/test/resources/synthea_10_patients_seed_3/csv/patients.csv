@@ -1,13 +1,13 @@
-ID,BIRTHDATE,DEATHDATE,SSN,DRIVERS,PASSPORT,PREFIX,FIRST,LAST,SUFFIX,MAIDEN,MARITAL,RACE,ETHNICITY,GENDER,BIRTHPLACE,ADDRESS,CITY,STATE,ZIP
-c2e10aa3-317b-4a5a-9549-4f5f807e2afa,2018-10-22,,999-79-2442,,,,Andrew29,Beer512,,,,white,greek,F,Quincy,940 Koss Skyway Apt 78,Concord,Massachusetts,01742
-5e50623e-eff8-40b6-bf98-b170f12ce842,1999-02-11,,999-26-4824,S99924902,,Ms.,Dona966,Hilpert278,,,,white,french_canadian,F,Somerville,589 West Viaduct,Amherst,Massachusetts,01002
-37e957ce-67da-42e9-b7f2-7c097546878a,1995-10-20,,999-79-7691,S99919818,X64895107X,Mr.,Sydney660,Robel940,,,,white,french_canadian,M,Berkley,775 Kutch Quay,Weymouth Town,Massachusetts,02188
-3cf0d0c8-6b4f-4080-9be1-b5b3e276dbe7,2015-10-27,,999-87-4871,,,,Bobby524,Krajcik437,,,,white,american,M,Pittsfield,150 Tromp Bay Suite 68,Springfield,Massachusetts,01013
-a93e1fa0-88e4-4011-8fc3-928791d7147f,1977-11-11,,999-93-6261,S99937160,X51171214X,Mr.,Martín25,Armas910,,,M,black,west_indian,M,New Bedford,610 Leannon Club Suite 30,Fall River,Massachusetts,02720
-6aec63a5-0276-4f5a-baf0-8200c08a913a,1975-06-13,,999-60-2822,S99997436,X60017135X,Mr.,Royal919,Nienow652,,,M,white,italian,M,Franklin Town,1078 Weimann Well Suite 35,Alford,Massachusetts,
-891464d7-330c-4df0-b8fb-7f91a1cf7b01,1978-08-19,,999-96-6923,S99943903,X84078485X,Mrs.,Pamela954,Conn188,,Bauch723,M,hispanic,puerto_rican,F,Boxford,786 Weber Crossing Suite 64,Boston,Massachusetts,02108
-85eb31a0-3bc5-4a8b-99f4-7cd1d0fe50d9,1966-01-06,,999-84-5057,S99922755,X75701175X,Mrs.,Melissa844,Gleichner915,,Dibbert990,M,white,french_canadian,F,Gardner,308 Tromp Rapid,Boston,Massachusetts,02108
-76744f4b-6123-445e-9033-9ee9baa2efec,1967-08-23,,999-50-6731,S99949375,X7102894X,Mr.,Trenton748,Welch179,,,M,black,african,M,Warren,835 O'Reilly Key,Natick,Massachusetts,01760
-16783570-42f9-45de-a693-adb38f17cdd6,1941-10-25,2000-03-16,999-25-8912,S99929661,X7755617X,Mr.,Rudy520,Morissette863,,,M,white,irish,M,Brockton,477 O'Reilly Hollow Unit 57,Newton,Massachusetts,02458
-b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,1941-10-25,2011-01-20,999-62-9356,S99941829,X57565795X,Mr.,Emerson869,Littel644,,,S,white,irish,M,Fall River,451 King Rue,Newton,Massachusetts,02458
-6b016335-bc37-44e1-bce1-7ce59e248769,1941-10-25,,999-85-8847,S99952534,X76775775X,Mr.,Francisco472,Armstrong51,,,S,white,irish,M,Cambridge,777 Rice Harbor Suite 92,Newton,Massachusetts,02458
+ID,BIRTHDATE,DEATHDATE,SSN,DRIVERS,PASSPORT,PREFIX,FIRST,LAST,SUFFIX,MAIDEN,MARITAL,RACE,ETHNICITY,GENDER,BIRTHPLACE,ADDRESS,CITY,STATE,COUNTY,ZIP,LAT,LON,HEALTHCARE_EXPENSES,HEALTHCARE_COVERAGE
+c2e10aa3-317b-4a5a-9549-4f5f807e2afa,2018-10-22,,999-79-2442,,,,Andrew29,Beer512,,,,white,greek,F,Quincy,940 Koss Skyway Apt 78,Concord,Massachusetts,,1742,,,,
+5e50623e-eff8-40b6-bf98-b170f12ce842,1999-02-11,,999-26-4824,S99924902,,Ms.,Dona966,Hilpert278,,,,white,french_canadian,F,Somerville,589 West Viaduct,Amherst,Massachusetts,,1002,,,,
+37e957ce-67da-42e9-b7f2-7c097546878a,1995-10-20,,999-79-7691,S99919818,X64895107X,Mr.,Sydney660,Robel940,,,,white,french_canadian,M,Berkley,775 Kutch Quay,Weymouth Town,Massachusetts,,2188,,,,
+3cf0d0c8-6b4f-4080-9be1-b5b3e276dbe7,2015-10-27,,999-87-4871,,,,Bobby524,Krajcik437,,,,white,american,M,Pittsfield,150 Tromp Bay Suite 68,Springfield,Massachusetts,,1013,,,,
+a93e1fa0-88e4-4011-8fc3-928791d7147f,1977-11-11,,999-93-6261,S99937160,X51171214X,Mr.,Martín25,Armas910,,,M,black,west_indian,M,New Bedford,610 Leannon Club Suite 30,Fall River,Massachusetts,,2720,,,,
+6aec63a5-0276-4f5a-baf0-8200c08a913a,1975-06-13,,999-60-2822,S99997436,X60017135X,Mr.,Royal919,Nienow652,,,M,white,italian,M,Franklin Town,1078 Weimann Well Suite 35,Alford,Massachusetts,,,,,,
+891464d7-330c-4df0-b8fb-7f91a1cf7b01,1978-08-19,,999-96-6923,S99943903,X84078485X,Mrs.,Pamela954,Conn188,,Bauch723,M,hispanic,puerto_rican,F,Boxford,786 Weber Crossing Suite 64,Boston,Massachusetts,,2108,,,,
+85eb31a0-3bc5-4a8b-99f4-7cd1d0fe50d9,1966-01-06,,999-84-5057,S99922755,X75701175X,Mrs.,Melissa844,Gleichner915,,Dibbert990,M,white,french_canadian,F,Gardner,308 Tromp Rapid,Boston,Massachusetts,,2108,,,,
+76744f4b-6123-445e-9033-9ee9baa2efec,1967-08-23,,999-50-6731,S99949375,X7102894X,Mr.,Trenton748,Welch179,,,M,black,african,M,Warren,835 O'Reilly Key,Natick,Massachusetts,,1760,,,,
+16783570-42f9-45de-a693-adb38f17cdd6,1941-10-25,2000-03-16,999-25-8912,S99929661,X7755617X,Mr.,Rudy520,Morissette863,,,M,white,irish,M,Brockton,477 O'Reilly Hollow Unit 57,Newton,Massachusetts,,2458,,,,
+b7fe76c4-0db1-4a7b-af2e-ebc9697f3b2b,1941-10-25,2011-01-20,999-62-9356,S99941829,X57565795X,Mr.,Emerson869,Littel644,,,S,white,irish,M,Fall River,451 King Rue,Newton,Massachusetts,,2458,,,,
+6b016335-bc37-44e1-bce1-7ce59e248769,1941-10-25,,999-85-8847,S99952534,X76775775X,Mr.,Francisco472,Armstrong51,,,S,white,irish,M,Cambridge,777 Rice Harbor Suite 92,Newton,Massachusetts,,2458,,,,

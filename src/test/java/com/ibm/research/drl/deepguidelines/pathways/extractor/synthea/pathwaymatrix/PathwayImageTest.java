@@ -29,8 +29,8 @@ public class PathwayImageTest {
                 new String[] { "", "", "", "",
                         "8302-2_UNKNOWNBUCKET;72514-3_UNKNOWNBUCKET;29463-7_UNKNOWNBUCKET;39156-5_High;8462-4_Normal;8480-6_Normal;2093-3_Normal;2571-8_Normal;18262-6_Optimal;2085-9_High;72166-2_Never" },
                 new String[] { "A_65363002", "", "", "", "O_65363002" },
-                new String[] { "A_849574_MedA", "O_849574_MedA", "A_1000126_MedB", "", "" },
-                new String[] { "", "", "", "76601001", "" },
+                new String[] { "A_849574_MedA", "O_849574_MedA", "A_1000126_MedB", "", "",  },
+                new String[] { "", "", "76601001", "76601001", "" },
                 new String[] { "", "", "", "", "AliveE" }
         };
         String[] lines = new String[rows.length];

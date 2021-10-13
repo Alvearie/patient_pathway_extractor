@@ -51,7 +51,10 @@ public class ExpectedDataForSynthea1PatientSeed3 {
         //        │MEDICATION         │START              │Medication_2       │2009-11-18T00:00:0│ slice 2
         //        │                   │                   │                   │0Z                │
         //        ├───────────────────┼───────────────────┼───────────────────┼──────────────────┤
-        //        │PROCEDURE          │ISOLATED           │Medication_2       │2009-11-18T23:59:5│ slice 2
+        //        │PROCEDURE          │START              │Medication_2       │2009-11-18T00:00:0│ slice 2
+        //        │                   │                   │                   │0Z                │
+        //        ├───────────────────┼───────────────────┼───────────────────┼──────────────────┤
+        //        │PROCEDURE          │STOP               │Medication_2       │2009-11-18T23:59:5│ slice 3
         //        │                   │                   │                   │9Z                │
         //        ├───────────────────┼───────────────────┼───────────────────┼──────────────────┤
         //        │CONDITION          │STOP               │Condition_3        │2010-03-31T23:59:5│ slice 4
@@ -84,11 +87,14 @@ public class ExpectedDataForSynthea1PatientSeed3 {
         MedicationsPathwayMatrixCell pathwayMatrixCellSlice2Cell0 = new MedicationsPathwayMatrixCell("1000126", 10, PathwayEventTemporalType.START);
         pathwayMatrixCellSlice2Cell0.setDispensesBucket("MedB");
         PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).add(pathwayMatrixCellSlice2Cell0);
+        // PROCEDURE, Medication_2, START
+        ProceduresPathwayMatrixCell pathwayMatrixCellSlice2Cell1 = new ProceduresPathwayMatrixCell("76601001", PathwayEventTemporalType.START);
+        PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).add(pathwayMatrixCellSlice2Cell1);
 
         // slice 3
         PATHWAY_MATRIX_CELLS_BY_SLICE.put(3, new ObjectArrayList<>());
-        // PROCEDURE, Medication_2, ISOLATED
-        ProceduresPathwayMatrixCell pathwayMatrixCellSlice3Cell0 = new ProceduresPathwayMatrixCell("76601001", PathwayEventTemporalType.ISOLATED);
+        // PROCEDURE, Medication_2, STOP
+        ProceduresPathwayMatrixCell pathwayMatrixCellSlice3Cell0 = new ProceduresPathwayMatrixCell("76601001", PathwayEventTemporalType.STOP);
         PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).add(pathwayMatrixCellSlice3Cell0);
 
         // slice 4
@@ -140,8 +146,9 @@ public class ExpectedDataForSynthea1PatientSeed3 {
         pathwayMatrix.setQuick(1, 3, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(1).get(0)); // MEDICATION, Condition_3, STOP
         // slice 2
         pathwayMatrix.setQuick(2, 3, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(0)); // MEDICATION, Medication_2, START
+        pathwayMatrix.setQuick(2, 4, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(1)); // PROCEDURE, Medication_2, START
         // slice 3
-        pathwayMatrix.setQuick(3, 4, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0)); // PROCEDURE, Medication_2, ISOLATED
+        pathwayMatrix.setQuick(3, 4, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0)); // PROCEDURE, Medication_2, STOP
         // slice 4
         pathwayMatrix.setQuick(4, 1, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(0)); // OBSERVATION, Immunization_1, ISOLATED
         pathwayMatrix.setQuick(4, 1, 1, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(1)); // OBSERVATION, Immunization_1, ISOLATED
@@ -172,8 +179,9 @@ public class ExpectedDataForSynthea1PatientSeed3 {
         pathwayImage.setQuick(3, 1, PATHWAY_MATRIX_CELLS_BY_SLICE.get(1).get(0).asStringValue()); // MEDICATION, Condition_3, STOP
         // slice 2
         pathwayImage.setQuick(3, 2, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(0).asStringValue()); // MEDICATION, Medication_2, START
+        pathwayImage.setQuick(4, 2, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(1).asStringValue()); // PROCEDURE, Medication_2, START
         // slice 3
-        pathwayImage.setQuick(4, 3, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0).asStringValue()); // PROCEDURE, Medication_2, ISOLATED
+        pathwayImage.setQuick(4, 3, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0).asStringValue()); // PROCEDURE, Medication_2, STOP
         // slice 4
         pathwayImage.setQuick(1, 4, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(0).asStringValue()); // OBSERVATION, Immunization_1, ISOLATED
         pathwayImage.setQuick(1, 5, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(1).asStringValue()); // OBSERVATION, Immunization_1, ISOLATED
@@ -197,16 +205,16 @@ public class ExpectedDataForSynthea1PatientSeed3 {
         PathwayImage pathwayImage = new PathwayImage(6, 5);
         // demographics
         pathwayImage.appendQuick(0, 0, DEMOGRAPHICS_PATHWAY_MATRIX_CELL.asStringValue());
-        // slicee 0
+        // slice 0
         pathwayImage.appendQuick(2, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(0).get(0).asStringValue()); // CONDITION, Condition_3, START
         pathwayImage.setQuick(3, 0, PATHWAY_MATRIX_CELLS_BY_SLICE.get(0).get(1).asStringValue()); // MEDICATION, Condition_3, START
         // slice 1
-
         pathwayImage.setQuick(3, 1, PATHWAY_MATRIX_CELLS_BY_SLICE.get(1).get(0).asStringValue()); // MEDICATION, Condition_3, STOP
         // slice 2
-        pathwayImage.setQuick(3, 2, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(0).asStringValue()); // MEDICATION, Medication_2, START
+        pathwayImage.appendQuick(3, 2, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(0).asStringValue()); // MEDICATION, Medication_2, START
+        pathwayImage.setQuick(4, 2, PATHWAY_MATRIX_CELLS_BY_SLICE.get(2).get(1).asStringValue()); // PROCEDURE, Medication_2, START
         // slice 3
-        pathwayImage.appendQuick(4, 3, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0).asStringValue()); // PROCEDURE, Medication_2, ISOLATED
+        pathwayImage.appendQuick(4, 3, PATHWAY_MATRIX_CELLS_BY_SLICE.get(3).get(0).asStringValue()); // PROCEDURE, Medication_2, STOP
         // slice 4
         pathwayImage.appendQuick(1, 4, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(0).asStringValue()); // OBSERVATION, Immunization_1, ISOLATED
         pathwayImage.appendQuick(1, 4, PATHWAY_MATRIX_CELLS_BY_SLICE.get(4).get(1).asStringValue()); // OBSERVATION, Immunization_1, ISOLATED

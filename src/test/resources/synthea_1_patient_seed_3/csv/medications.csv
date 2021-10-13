@@ -1,15 +1,15 @@
-START,STOP,PATIENT,ENCOUNTER,CODE,DESCRIPTION,COST,DISPENSES,TOTALCOST,REASONCODE,REASONDESCRIPTION
-2007-11-29,2008-11-23,Patient_1,Medication_1,389221,Etonogestrel 68 MG Drug Implant,599.30,12,7191.60,,
-2009-07-27,2009-08-10,Patient_1,Condition_3,849574,Naproxen sodium 220 MG Oral Tablet,16.14,1,16.14,,
-2009-11-18,2010-09-29,Patient_1,Medication_2,1000126,1 ML medroxyprogesterone acetate 150 MG/ML Injection,406.88,10,4068.80,,
-2012-04-25,2018-04-24,Patient_1,Medication_3,316672,Simvistatin 10 MG,263.49,10,2634.90,55822004,Hyperlipidemia
-2012-08-11,2013-08-06,Patient_1,Medication_4,389221,Etonogestrel 68 MG Drug Implant,580.67,12,6968.04,,
-2013-04-25,2014-04-25,Patient_1,Medication_5,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
-2013-08-06,2014-08-01,Patient_1,Medication_6,757594,Jolivette 28 Day Pack,23.02,12,276.24,,
-2014-04-25,2015-04-25,Patient_1,Medication_7,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
-2015-04-25,2016-04-24,Patient_1,Medication_8,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
-2016-04-24,2017-04-24,Patient_1,Medication_9,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
-2017-04-24,2018-04-24,Patient_1,Medication_10,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
-2018-01-09,2018-01-16,Patient_1,Immunization_5,311989,Nitrofurantoin 5 MG/ML Oral Suspension,1790.85,1,1790.85,38822007,Cystitis
-2018-01-09,2018-01-16,Patient_1,Immunization_5,1094107,Phenazopyridine hydrochloride 100 MG Oral Tablet,65.96,1,65.96,38822007,Cystitis
-2018-04-24,,Patient_1,Medication_11,316672,Simvistatin 10 MG,263.49,12,3161.88,55822004,Hyperlipidemia
+START,STOP,PATIENT,PAYER,ENCOUNTER,CODE,DESCRIPTION,BASE_COST,PAYER_COVERAGE,DISPENSES,TOTALCOST,REASONCODE,REASONDESCRIPTION
+2007-11-29,2008-11-23,Patient_1,,Medication_1,389221,Etonogestrel 68 MG Drug Implant,599.3,,12,7191.6,,
+2009-07-27,2009-08-10,Patient_1,,Condition_3,849574,Naproxen sodium 220 MG Oral Tablet,16.14,,1,16.14,,
+2009-11-18,2010-09-29,Patient_1,,Medication_2,1000126,1 ML medroxyprogesterone acetate 150 MG/ML Injection,406.88,,10,4068.8,,
+2012-04-25,2018-04-24,Patient_1,,Medication_3,316672,Simvistatin 10 MG,263.49,,10,2634.9,55822004,Hyperlipidemia
+2012-08-11,2013-08-06,Patient_1,,Medication_4,389221,Etonogestrel 68 MG Drug Implant,580.67,,12,6968.04,,
+2013-04-25,2014-04-25,Patient_1,,Medication_5,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia
+2013-08-06,2014-08-01,Patient_1,,Medication_6,757594,Jolivette 28 Day Pack,23.02,,12,276.24,,
+2014-04-25,2015-04-25,Patient_1,,Medication_7,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia
+2015-04-25,2016-04-24,Patient_1,,Medication_8,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia
+2016-04-24,2017-04-24,Patient_1,,Medication_9,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia
+2017-04-24,2018-04-24,Patient_1,,Medication_10,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia
+2018-01-09,2018-01-16,Patient_1,,Immunization_5,311989,Nitrofurantoin 5 MG/ML Oral Suspension,1790.85,,1,1790.85,38822007,Cystitis
+2018-01-09,2018-01-16,Patient_1,,Immunization_5,1094107,Phenazopyridine hydrochloride 100 MG Oral Tablet,65.96,,1,65.96,38822007,Cystitis
+2018-04-24,,Patient_1,,Medication_11,316672,Simvistatin 10 MG,263.49,,12,3161.88,55822004,Hyperlipidemia

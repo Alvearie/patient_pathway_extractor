@@ -80,7 +80,7 @@ public class PathwayMatrixVisualizationBuilder extends AbstractVisualizationBuil
     }
 
     public PathwayMatrixVisualizationBuilder(
-            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.synthea.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
+            @Value("${com.ibm.research.drl.deepguidelines.pathways.extractor.output.produce.javascript.data.for.visualizations.for.patient.with.ids}") String[] patientIdsForWhichWeWantVisualizations) {
         super(patientIdsForWhichWeWantVisualizations);
     }
 
